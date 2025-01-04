@@ -7,10 +7,10 @@ html documents that Canvas doesn't play nice with.
 
 ## Contents
 
-- [lab report instructions](labs/lab-report.html)
-- [lab setup](labs/lab-setup.html)
-- [lab 1](labs/lab1.html)
-<?- [lab 2](labs/lab2.html)
-- [lab 3](labs/lab3.html)
-- [lab 4](labs/lab4.html)
-- [final-project](labs/final-project.html)?>
+- [Lab Report Instructions](labs/lab-report.html)
+- [Lab Setup](labs/lab-setup.html)
+- [Lab 1](labs/lab1.html)
+<?- [Lab 2](labs/lab2.html)
+- [Lab 3](labs/lab3.html)
+- [Lab 4](labs/lab4.html)
+- [Final-project](labs/final-project.html)?>
