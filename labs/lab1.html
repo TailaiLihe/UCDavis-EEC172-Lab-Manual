@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lab 1 - Development Tools Tutorial and Lab Introduction</title>
+  <!-- <link rel="stylesheet" href="assets/github-markdown-light.css" /> -->
+  <style>
+    /*github markdown light*/
+
+    .markdown-body {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      margin: 0;
+      color: #1F2328;
+      background-color: #ffffff;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+      font-size: 16px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .markdown-body .octicon {
+      display: inline-block;
+      fill: currentColor;
+      vertical-align: text-bottom;
+    }
+
+    .markdown-body h1:hover .anchor .octicon-link:before,
+    .markdown-body h2:hover .anchor .octicon-link:before,
+    .markdown-body h3:hover .anchor .octicon-link:before,
+    .markdown-body h4:hover .anchor .octicon-link:before,
+    .markdown-body h5:hover .anchor .octicon-link:before,
+    .markdown-body h6:hover .anchor .octicon-link:before {
+      width: 16px;
+      height: 16px;
+      content: ' ';
+      display: inline-block;
+      background-color: currentColor;
+      -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+      mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+    }
+
+    .markdown-body details,
+    .markdown-body figcaption,
+    .markdown-body figure {
+      display: block;
+    }
+
+    .markdown-body summary {
+      display: list-item;
+    }
+
+    .markdown-body [hidden] {
+      display: none !important;
+    }
+
+    .markdown-body a {
+      background-color: transparent;
+      color: #0969da;
+      text-decoration: none;
+    }
+
+    .markdown-body abbr[title] {
+      border-bottom: none;
+      -webkit-text-decoration: underline dotted;
+      text-decoration: underline dotted;
+    }
+
+    .markdown-body b,
+    .markdown-body strong {
+      font-weight: 600;
+    }
+
+    .markdown-body dfn {
+      font-style: italic;
+    }
+
+    .markdown-body h1 {
+      margin: .67em 0;
+      font-weight: 600;
+      padding-bottom: .3em;
+      font-size: 2em;
+      border-bottom: 1px solid hsla(210,18%,87%,1);
+    }
+
+    .markdown-body mark {
+      background-color: #fff8c5;
+      color: #1F2328;
+    }
+
+    .markdown-body small {
+      font-size: 90%;
+    }
+
+    .markdown-body sub,
+    .markdown-body sup {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+    }
+
+    .markdown-body sub {
+      bottom: -0.25em;
+    }
+
+    .markdown-body sup {
+      top: -0.5em;
+    }
+
+    .markdown-body img {
+      border-style: none;
+      max-width: 100%;
+      box-sizing: content-box;
+      background-color: #ffffff;
+    }
+
+    .markdown-body code,
+    .markdown-body kbd,
+    .markdown-body pre,
+    .markdown-body samp {
+      font-family: monospace;
+      font-size: 1em;
+    }
+
+    .markdown-body figure {
+      margin: 1em 40px;
+    }
+
+    .markdown-body hr {
+      box-sizing: content-box;
+      overflow: hidden;
+      background: transparent;
+      border-bottom: 1px solid hsla(210,18%,87%,1);
+      height: .25em;
+      padding: 0;
+      margin: 24px 0;
+      background-color: #d0d7de;
+      border: 0;
+    }
+
+    .markdown-body input {
+      font: inherit;
+      margin: 0;
+      overflow: visible;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .markdown-body [type=button],
+    .markdown-body [type=reset],
+    .markdown-body [type=submit] {
+      -webkit-appearance: button;
+      appearance: button;
+    }
+
+    .markdown-body [type=checkbox],
+    .markdown-body [type=radio] {
+      box-sizing: border-box;
+      padding: 0;
+    }
+
+    .markdown-body [type=number]::-webkit-inner-spin-button,
+    .markdown-body [type=number]::-webkit-outer-spin-button {
+      height: auto;
+    }
+
+    .markdown-body [type=search]::-webkit-search-cancel-button,
+    .markdown-body [type=search]::-webkit-search-decoration {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .markdown-body ::-webkit-input-placeholder {
+      color: inherit;
+      opacity: .54;
+    }
+
+    .markdown-body ::-webkit-file-upload-button {
+      -webkit-appearance: button;
+      appearance: button;
+      font: inherit;
+    }
+
+    .markdown-body a:hover {
+      text-decoration: underline;
+    }
+
+    .markdown-body ::placeholder {
+      color: #6e7781;
+      opacity: 1;
+    }
+
+    .markdown-body hr::before {
+      display: table;
+      content: "";
+    }
+
+    .markdown-body hr::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+
+    .markdown-body table {
+      border-spacing: 0;
+      border-collapse: collapse;
+      display: block;
+      width: max-content;
+      max-width: 100%;
+      overflow: auto;
+    }
+
+    .markdown-body td,
+    .markdown-body th {
+      padding: 0;
+    }
+
+    .markdown-body details summary {
+      cursor: pointer;
+    }
+
+    .markdown-body details:not([open])>*:not(summary) {
+      display: none !important;
+    }
+
+    .markdown-body a:focus,
+    .markdown-body [role=button]:focus,
+    .markdown-body input[type=radio]:focus,
+    .markdown-body input[type=checkbox]:focus {
+      outline: 2px solid #0969da;
+      outline-offset: -2px;
+      box-shadow: none;
+    }
+
+    .markdown-body a:focus:not(:focus-visible),
+    .markdown-body [role=button]:focus:not(:focus-visible),
+    .markdown-body input[type=radio]:focus:not(:focus-visible),
+    .markdown-body input[type=checkbox]:focus:not(:focus-visible) {
+      outline: solid 1px transparent;
+    }
+
+    .markdown-body a:focus-visible,
+    .markdown-body [role=button]:focus-visible,
+    .markdown-body input[type=radio]:focus-visible,
+    .markdown-body input[type=checkbox]:focus-visible {
+      outline: 2px solid #0969da;
+      outline-offset: -2px;
+      box-shadow: none;
+    }
+
+    .markdown-body a:not([class]):focus,
+    .markdown-body a:not([class]):focus-visible,
+    .markdown-body input[type=radio]:focus,
+    .markdown-body input[type=radio]:focus-visible,
+    .markdown-body input[type=checkbox]:focus,
+    .markdown-body input[type=checkbox]:focus-visible {
+      outline-offset: 0;
+    }
+
+    .markdown-body kbd {
+      display: inline-block;
+      padding: 3px 5px;
+      font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+      line-height: 10px;
+      color: #1F2328;
+      vertical-align: middle;
+      background-color: #f6f8fa;
+      border: solid 1px rgba(175,184,193,0.2);
+      border-bottom-color: rgba(175,184,193,0.2);
+      border-radius: 6px;
+      box-shadow: inset 0 -1px 0 rgba(175,184,193,0.2);
+    }
+
+    .markdown-body h1,
+    .markdown-body h2,
+    .markdown-body h3,
+    .markdown-body h4,
+    .markdown-body h5,
+    .markdown-body h6 {
+      margin-top: 24px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .markdown-body h2 {
+      font-weight: 600;
+      padding-bottom: .3em;
+      font-size: 1.5em;
+      border-bottom: 1px solid hsla(210,18%,87%,1);
+    }
+
+    .markdown-body h3 {
+      font-weight: 600;
+      font-size: 1.25em;
+    }
+
+    .markdown-body h4 {
+      font-weight: 600;
+      font-size: 1em;
+    }
+
+    .markdown-body h5 {
+      font-weight: 600;
+      font-size: .875em;
+    }
+
+    .markdown-body h6 {
+      font-weight: 600;
+      font-size: .85em;
+      color: #656d76;
+    }
+
+    .markdown-body p {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .markdown-body blockquote {
+      margin: 0;
+      padding: 0 1em;
+      color: #656d76;
+      border-left: .25em solid #d0d7de;
+    }
+
+    .markdown-body ul,
+    .markdown-body ol {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: 2em;
+    }
+
+    .markdown-body ol ol,
+    .markdown-body ul ol {
+      list-style-type: lower-roman;
+    }
+
+    .markdown-body ul ul ol,
+    .markdown-body ul ol ol,
+    .markdown-body ol ul ol,
+    .markdown-body ol ol ol {
+      list-style-type: lower-alpha;
+    }
+
+    .markdown-body dd {
+      margin-left: 0;
+    }
+
+    .markdown-body tt,
+    .markdown-body code,
+    .markdown-body samp {
+      font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+      font-size: 12px;
+    }
+
+    .markdown-body pre {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+      font-size: 12px;
+      word-wrap: normal;
+    }
+
+    .markdown-body .octicon {
+      display: inline-block;
+      overflow: visible !important;
+      vertical-align: text-bottom;
+      fill: currentColor;
+    }
+
+    .markdown-body input::-webkit-outer-spin-button,
+    .markdown-body input::-webkit-inner-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .markdown-body .mr-2 {
+      margin-right: 8px !important;
+    }
+
+    .markdown-body::before {
+      display: table;
+      content: "";
+    }
+
+    .markdown-body::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+
+    .markdown-body>*:first-child {
+      margin-top: 0 !important;
+    }
+
+    .markdown-body>*:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    .markdown-body a:not([href]) {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .markdown-body .absent {
+      color: #d1242f;
+    }
+
+    .markdown-body .anchor {
+      float: left;
+      padding-right: 4px;
+      margin-left: -20px;
+      line-height: 1;
+    }
+
+    .markdown-body .anchor:focus {
+      outline: none;
+    }
+
+    .markdown-body p,
+    .markdown-body blockquote,
+    .markdown-body ul,
+    .markdown-body ol,
+    .markdown-body dl,
+    .markdown-body table,
+    .markdown-body pre,
+    .markdown-body details {
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    .markdown-body blockquote>:first-child {
+      margin-top: 0;
+    }
+
+    .markdown-body blockquote>:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body h1 .octicon-link,
+    .markdown-body h2 .octicon-link,
+    .markdown-body h3 .octicon-link,
+    .markdown-body h4 .octicon-link,
+    .markdown-body h5 .octicon-link,
+    .markdown-body h6 .octicon-link {
+      color: #1F2328;
+      vertical-align: middle;
+      visibility: hidden;
+    }
+
+    .markdown-body h1:hover .anchor,
+    .markdown-body h2:hover .anchor,
+    .markdown-body h3:hover .anchor,
+    .markdown-body h4:hover .anchor,
+    .markdown-body h5:hover .anchor,
+    .markdown-body h6:hover .anchor {
+      text-decoration: none;
+    }
+
+    .markdown-body h1:hover .anchor .octicon-link,
+    .markdown-body h2:hover .anchor .octicon-link,
+    .markdown-body h3:hover .anchor .octicon-link,
+    .markdown-body h4:hover .anchor .octicon-link,
+    .markdown-body h5:hover .anchor .octicon-link,
+    .markdown-body h6:hover .anchor .octicon-link {
+      visibility: visible;
+    }
+
+    .markdown-body h1 tt,
+    .markdown-body h1 code,
+    .markdown-body h2 tt,
+    .markdown-body h2 code,
+    .markdown-body h3 tt,
+    .markdown-body h3 code,
+    .markdown-body h4 tt,
+    .markdown-body h4 code,
+    .markdown-body h5 tt,
+    .markdown-body h5 code,
+    .markdown-body h6 tt,
+    .markdown-body h6 code {
+      padding: 0 .2em;
+      font-size: inherit;
+    }
+
+    .markdown-body summary h1,
+    .markdown-body summary h2,
+    .markdown-body summary h3,
+    .markdown-body summary h4,
+    .markdown-body summary h5,
+    .markdown-body summary h6 {
+      display: inline-block;
+    }
+
+    .markdown-body summary h1 .anchor,
+    .markdown-body summary h2 .anchor,
+    .markdown-body summary h3 .anchor,
+    .markdown-body summary h4 .anchor,
+    .markdown-body summary h5 .anchor,
+    .markdown-body summary h6 .anchor {
+      margin-left: -40px;
+    }
+
+    .markdown-body summary h1,
+    .markdown-body summary h2 {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .markdown-body ul.no-list,
+    .markdown-body ol.no-list {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .markdown-body ol[type="a s"] {
+      list-style-type: lower-alpha;
+    }
+
+    .markdown-body ol[type="A s"] {
+      list-style-type: upper-alpha;
+    }
+
+    .markdown-body ol[type="i s"] {
+      list-style-type: lower-roman;
+    }
+
+    .markdown-body ol[type="I s"] {
+      list-style-type: upper-roman;
+    }
+
+    .markdown-body ol[type="1"] {
+      list-style-type: decimal;
+    }
+
+    .markdown-body div>ol:not([type]) {
+      list-style-type: decimal;
+    }
+
+    .markdown-body ul ul,
+    .markdown-body ul ol,
+    .markdown-body ol ol,
+    .markdown-body ol ul {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .markdown-body li>p {
+      margin-top: 16px;
+    }
+
+    .markdown-body li+li {
+      margin-top: .25em;
+    }
+
+    .markdown-body dl {
+      padding: 0;
+    }
+
+    .markdown-body dl dt {
+      padding: 0;
+      margin-top: 16px;
+      font-size: 1em;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .markdown-body dl dd {
+      padding: 0 16px;
+      margin-bottom: 16px;
+    }
+
+    .markdown-body table th {
+      font-weight: 600;
+    }
+
+    .markdown-body table th,
+    .markdown-body table td {
+      padding: 6px 13px;
+      border: 1px solid #d0d7de;
+    }
+
+    .markdown-body table td>:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body table tr {
+      background-color: #ffffff;
+      border-top: 1px solid hsla(210,18%,87%,1);
+    }
+
+    .markdown-body table tr:nth-child(2n) {
+      background-color: #f6f8fa;
+    }
+
+    .markdown-body table img {
+      background-color: transparent;
+    }
+
+    .markdown-body img[align=right] {
+      padding-left: 20px;
+    }
+
+    .markdown-body img[align=left] {
+      padding-right: 20px;
+    }
+
+    .markdown-body .emoji {
+      max-width: none;
+      vertical-align: text-top;
+      background-color: transparent;
+    }
+
+    .markdown-body span.frame {
+      display: block;
+      overflow: hidden;
+    }
+
+    .markdown-body span.frame>span {
+      display: block;
+      float: left;
+      width: auto;
+      padding: 7px;
+      margin: 13px 0 0;
+      overflow: hidden;
+      border: 1px solid #d0d7de;
+    }
+
+    .markdown-body span.frame span img {
+      display: block;
+      float: left;
+    }
+
+    .markdown-body span.frame span span {
+      display: block;
+      padding: 5px 0 0;
+      clear: both;
+      color: #1F2328;
+    }
+
+    .markdown-body span.align-center {
+      display: block;
+      overflow: hidden;
+      clear: both;
+    }
+
+    .markdown-body span.align-center>span {
+      display: block;
+      margin: 13px auto 0;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .markdown-body span.align-center span img {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .markdown-body span.align-right {
+      display: block;
+      overflow: hidden;
+      clear: both;
+    }
+
+    .markdown-body span.align-right>span {
+      display: block;
+      margin: 13px 0 0;
+      overflow: hidden;
+      text-align: right;
+    }
+
+    .markdown-body span.align-right span img {
+      margin: 0;
+      text-align: right;
+    }
+
+    .markdown-body span.float-left {
+      display: block;
+      float: left;
+      margin-right: 13px;
+      overflow: hidden;
+    }
+
+    .markdown-body span.float-left span {
+      margin: 13px 0 0;
+    }
+
+    .markdown-body span.float-right {
+      display: block;
+      float: right;
+      margin-left: 13px;
+      overflow: hidden;
+    }
+
+    .markdown-body span.float-right>span {
+      display: block;
+      margin: 13px auto 0;
+      overflow: hidden;
+      text-align: right;
+    }
+
+    .markdown-body code,
+    .markdown-body tt {
+      padding: .2em .4em;
+      margin: 0;
+      font-size: 85%;
+      white-space: break-spaces;
+      background-color: rgba(175,184,193,0.2);
+      border-radius: 6px;
+    }
+
+    .markdown-body code br,
+    .markdown-body tt br {
+      display: none;
+    }
+
+    .markdown-body del code {
+      text-decoration: inherit;
+    }
+
+    .markdown-body samp {
+      font-size: 85%;
+    }
+
+    .markdown-body pre code {
+      font-size: 100%;
+    }
+
+    .markdown-body pre>code {
+      padding: 0;
+      margin: 0;
+      word-break: normal;
+      white-space: pre;
+      background: transparent;
+      border: 0;
+    }
+
+    .markdown-body .highlight {
+      margin-bottom: 16px;
+    }
+
+    .markdown-body .highlight pre {
+      margin-bottom: 0;
+      word-break: normal;
+    }
+
+    .markdown-body .highlight pre,
+    .markdown-body pre {
+      padding: 16px;
+      overflow: auto;
+      font-size: 85%;
+      line-height: 1.45;
+      color: #1F2328;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+    }
+
+    .markdown-body pre code,
+    .markdown-body pre tt {
+      display: inline;
+      max-width: auto;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      line-height: inherit;
+      word-wrap: normal;
+      background-color: transparent;
+      border: 0;
+    }
+
+    .markdown-body .csv-data td,
+    .markdown-body .csv-data th {
+      padding: 5px;
+      overflow: hidden;
+      font-size: 12px;
+      line-height: 1;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .markdown-body .csv-data .blob-num {
+      padding: 10px 8px 9px;
+      text-align: right;
+      background: #ffffff;
+      border: 0;
+    }
+
+    .markdown-body .csv-data tr {
+      border-top: 0;
+    }
+
+    .markdown-body .csv-data th {
+      font-weight: 600;
+      background: #f6f8fa;
+      border-top: 0;
+    }
+
+    .markdown-body [data-footnote-ref]::before {
+      content: "[";
+    }
+
+    .markdown-body [data-footnote-ref]::after {
+      content: "]";
+    }
+
+    .markdown-body .footnotes {
+      font-size: 12px;
+      color: #656d76;
+      border-top: 1px solid #d0d7de;
+    }
+
+    .markdown-body .footnotes ol {
+      padding-left: 16px;
+    }
+
+    .markdown-body .footnotes ol ul {
+      display: inline-block;
+      padding-left: 16px;
+      margin-top: 16px;
+    }
+
+    .markdown-body .footnotes li {
+      position: relative;
+    }
+
+    .markdown-body .footnotes li:target::before {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      bottom: -8px;
+      left: -24px;
+      pointer-events: none;
+      content: "";
+      border: 2px solid #0969da;
+      border-radius: 6px;
+    }
+
+    .markdown-body .footnotes li:target {
+      color: #1F2328;
+    }
+
+    .markdown-body .footnotes .data-footnote-backref g-emoji {
+      font-family: monospace;
+    }
+
+    .markdown-body .pl-c {
+      color: #57606a;
+    }
+
+    .markdown-body .pl-c1,
+    .markdown-body .pl-s .pl-v {
+      color: #0550ae;
+    }
+
+    .markdown-body .pl-e,
+    .markdown-body .pl-en {
+      color: #6639ba;
+    }
+
+    .markdown-body .pl-smi,
+    .markdown-body .pl-s .pl-s1 {
+      color: #24292f;
+    }
+
+    .markdown-body .pl-ent {
+      color: #116329;
+    }
+
+    .markdown-body .pl-k {
+      color: #cf222e;
+    }
+
+    .markdown-body .pl-s,
+    .markdown-body .pl-pds,
+    .markdown-body .pl-s .pl-pse .pl-s1,
+    .markdown-body .pl-sr,
+    .markdown-body .pl-sr .pl-cce,
+    .markdown-body .pl-sr .pl-sre,
+    .markdown-body .pl-sr .pl-sra {
+      color: #0a3069;
+    }
+
+    .markdown-body .pl-v,
+    .markdown-body .pl-smw {
+      color: #953800;
+    }
+
+    .markdown-body .pl-bu {
+      color: #82071e;
+    }
+
+    .markdown-body .pl-ii {
+      color: #f6f8fa;
+      background-color: #82071e;
+    }
+
+    .markdown-body .pl-c2 {
+      color: #f6f8fa;
+      background-color: #cf222e;
+    }
+
+    .markdown-body .pl-sr .pl-cce {
+      font-weight: bold;
+      color: #116329;
+    }
+
+    .markdown-body .pl-ml {
+      color: #3b2300;
+    }
+
+    .markdown-body .pl-mh,
+    .markdown-body .pl-mh .pl-en,
+    .markdown-body .pl-ms {
+      font-weight: bold;
+      color: #0550ae;
+    }
+
+    .markdown-body .pl-mi {
+      font-style: italic;
+      color: #24292f;
+    }
+
+    .markdown-body .pl-mb {
+      font-weight: bold;
+      color: #24292f;
+    }
+
+    .markdown-body .pl-md {
+      color: #82071e;
+      background-color: #ffebe9;
+    }
+
+    .markdown-body .pl-mi1 {
+      color: #116329;
+      background-color: #dafbe1;
+    }
+
+    .markdown-body .pl-mc {
+      color: #953800;
+      background-color: #ffd8b5;
+    }
+
+    .markdown-body .pl-mi2 {
+      color: #eaeef2;
+      background-color: #0550ae;
+    }
+
+    .markdown-body .pl-mdr {
+      font-weight: bold;
+      color: #8250df;
+    }
+
+    .markdown-body .pl-ba {
+      color: #57606a;
+    }
+
+    .markdown-body .pl-sg {
+      color: #8c959f;
+    }
+
+    .markdown-body .pl-corl {
+      text-decoration: underline;
+      color: #0a3069;
+    }
+
+    .markdown-body g-emoji {
+      display: inline-block;
+      min-width: 1ch;
+      font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      font-size: 1em;
+      font-style: normal !important;
+      font-weight: 400;
+      line-height: 1;
+      vertical-align: -0.075em;
+    }
+
+    .markdown-body g-emoji img {
+      width: 1em;
+      height: 1em;
+    }
+
+    .markdown-body .task-list-item {
+      list-style-type: none;
+    }
+
+    .markdown-body .task-list-item label {
+      font-weight: 400;
+    }
+
+    .markdown-body .task-list-item.enabled label {
+      cursor: pointer;
+    }
+
+    .markdown-body .task-list-item+.task-list-item {
+      margin-top: 4px;
+    }
+
+    .markdown-body .task-list-item .handle {
+      display: none;
+    }
+
+    .markdown-body .task-list-item-checkbox {
+      margin: 0 .2em .25em -1.4em;
+      vertical-align: middle;
+    }
+
+    .markdown-body .contains-task-list:dir(rtl) .task-list-item-checkbox {
+      margin: 0 -1.6em .25em .2em;
+    }
+
+    .markdown-body .contains-task-list {
+      position: relative;
+    }
+
+    .markdown-body .contains-task-list:hover .task-list-item-convert-container,
+    .markdown-body .contains-task-list:focus-within .task-list-item-convert-container {
+      display: block;
+      width: auto;
+      height: 24px;
+      overflow: visible;
+      clip: auto;
+    }
+
+    .markdown-body ::-webkit-calendar-picker-indicator {
+      filter: invert(50%);
+    }
+
+    .markdown-body .markdown-alert {
+      padding: 8px 16px;
+      margin-bottom: 16px;
+      color: inherit;
+      border-left: .25em solid #d0d7de;
+    }
+
+    .markdown-body .markdown-alert>:first-child {
+      margin-top: 0;
+    }
+
+    .markdown-body .markdown-alert>:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body .markdown-alert .markdown-alert-title {
+      display: flex;
+      font-weight: 500;
+      align-items: center;
+      line-height: 1;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-note {
+      border-left-color: #0969da;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-note .markdown-alert-title {
+      color: #0969da;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-important {
+      border-left-color: #8250df;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-important .markdown-alert-title {
+      color: #8250df;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-warning {
+      border-left-color: #9a6700;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-warning .markdown-alert-title {
+      color: #9a6700;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-tip {
+      border-left-color: #1f883d;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-tip .markdown-alert-title {
+      color: #1a7f37;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-caution {
+      border-left-color: #cf222e;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-caution .markdown-alert-title {
+      color: #d1242f;
+    }
+
+    /*end github markdown light*/
+
+        /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: auto;
+        padding: 45px;
+    }
+
+    div.fig {
+      vertical-align: top;
+      /* display: inline-block; */
+      display: block;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: auto;
+    }
+
+    .caption {
+      display: block;
+    }
+
+    @media (max-width: 767px) {
+        .markdown-body {
+            padding: 15px;
+        }
+    }
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<article class="markdown-body">
+<header id="title-block-header">
+<h1 class="title">Lab 1 - Development Tools Tutorial and Lab
+Introduction</h1>
+</header>
+<h2 id="overview">Overview</h2>
+<p>This tutorial will cover the basic software development tools that
+will be used in this course, including Code Composer Studio (CCS), CCS
+UniFlash, and the TI Pin Mux Tool.</p>
+<p><em><strong>This lab assignment is alotted 2 sections (1 week) and
+verification is due by the end of your last lab section of week
+1.</strong></em></p>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>At the end of this lab, students should be able to:</p>
+<ul>
+<li>Know build and flash process for microcontrollers</li>
+<li>Use the CCS IDE on their local machine</li>
+<li>Set up new projects for the CC3200</li>
+<li>Configure build settings for CC3200 projects</li>
+</ul>
+<h2 id="requirements-and-dependencies">Requirements and
+Dependencies</h2>
+<h3 id="hardware-requirements">Hardware Requirements</h3>
+<ul>
+<li>SimpleLink CC3200 LaunchPad (CC3200-LAUNCHXL)</li>
+<li>Micro-USB to USB-A cable</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Do not lose the shorting/jumper blocks that
+come with the board. They are used to configure different hardware
+functions on the board, and may be needed for this and future labs.</p>
+</blockquote>
+<h3 id="software-dependencies">Software Dependencies</h3>
+<ul>
+<li>Windows 10 or later</li>
+<li>Code Composer Studio (CSS) IDE [latest]</li>
+<li>CC3200 Software Development Kit [latest]</li>
+<li>CC3200SDK-ServicePack [latest]</li>
+<li>TI sysconfig tool [latest]</li>
+<li>CCS UniFlash [v3.4.1.x] or cc3200tool [latest]</li>
+<li>Terminal Emulator (e.g. PuTTY or TeraTerm)</li>
+</ul>
+<blockquote>
+<p>If you have not set up your software dependencies on your local
+machine, please do this first by following the <a
+href="lab-setup.html">lab setup instructions</a>.</p>
+</blockquote>
+<h2
+id="background---compiling-and-flashing-for-embedded-systems">Background
+- Compiling and Flashing for Embedded Systems</h2>
+<p>As one of the course prerequisites is C programming, we will not
+spend much time introducing the C programming language. However, it is
+important to have a solid grasps of the basic principles of compiling C
+programs, and how programs are loaded (or flashed) onto
+microcontrollers.</p>
+<h3 id="compiling">Compiling</h3>
+<p><em><strong>Compilation</strong></em> is the process of converting
+higher-level source code, such as C, into executable machine code.
+Typically, the <em><strong>C compilation process</strong></em> is made
+up of several steps. Usually, the source code first undergoes
+<em><strong>preprocessing</strong></em>, then each <code>.c</code> file
+is individually <em><strong>compiled</strong></em>, or translated, into
+<em><strong>assembly</strong></em> and stored in an <em><strong>object
+file</strong></em> (<code>.o</code> file), which are finally
+<em><strong>linked</strong></em> together into an executable file
+format, such as <em><strong>ELF</strong></em>. The elf file can then be
+converted into simpler formats, such as raw binary or Intel Hex, which
+are more suitable for loading onto the microcontroller.</p>
+<p>Because compilation can be time consuming, object files can be
+combined into a single <em><strong>library file</strong></em> that is
+easier to move and manage. Instead of passing all of the associated
+object files to the compiler, a single library file can be passed
+instead. Note the difference between a <em><strong>static
+library</strong></em> and a <em><strong>dynamic library</strong></em>.
+In the context of embedded systems, when we refer to a library, we
+usually mean a static library.</p>
+<p>This is relevant to how CCS compiles projects. Rather than recompile
+all of the SDK driver files, a driver library comes precompiled that the
+TI compiler can reference in the linking phase. Understanding the
+linking process will help you debug issues related to static
+libraries.</p>
+<h3 id="flashing">Flashing</h3>
+<p><em><strong>Flashing</strong></em> is a shorthand term for loading
+the compiled firmware onto hardware, typically into
+<em><strong>non-volatile memory</strong></em>, such as <em><strong>flash
+memory</strong></em>. Occasionally, however, the firmware may be loaded
+into <em><strong>RAM</strong></em> for debugging purposes. Where the
+firmware gets located in the memory address space is determined by the
+linker script, and needs to be passed to the tools used to upload the
+program into the MCU's memory.</p>
+<p>Specific information on what happens during the flashing process
+depends upon a number of factors, such as hardware organization and
+memory map, the presence of an operating system, and the underlying
+processor architecture; however, much of this is out of scope for this
+course.</p>
+<p>For this class, since we are using the CC3200, we can only flash
+using TI's UniFlash tool, as CCS will only load the program into RAM for
+debugging. To program either RAM or Flash, the CC3200 Launchpad must
+have the SOP2 Jumper on before it is connected to the computer. If the
+SOP2 Jumper is not connected, the CC3200 will automatically try to boot
+from flash memory before the computer can connect to it.</p>
+<hr />
+<h2 id="part-i-testing-examples-in-code-composer-studio">Part I: Testing
+Examples in Code Composer Studio</h2>
+<p>In this part, you will create a workspace and import two example
+programs to test with your CC3200 processor.</p>
+<blockquote>
+<p><strong>Note</strong>: When you work on a lab PC, you should always
+save your work on a remote device before you leave. Do
+<em><strong>not</strong></em> count on your files remaining on the drive
+of the lab PC. We highly recommend using GitHub to backup your work
+regularly.</p>
+</blockquote>
+<h3 id="blinky-example">Blinky Example</h3>
+<ol type="1">
+<li><p>Lauch Code Composer Studio (CCS) from the desktop icon or from
+the Start Menu.</p>
+<ul>
+<li><p>CCS will prompt you to select a directory for your workspace.
+Enter a directory in your user space, such as:</p>
+<p><strong><code>C:\Users\\*your_name*\eec172\lab\ccs_workspace</code></strong></p></li>
+</ul>
+<blockquote>
+<p>Do <em><strong><u>NOT</u></strong></em> check the box “Use this as
+the default and do not ask again” on any of the lab machines since these
+machines will be shared among many users. Even on your own machine, we
+recommend that you avoid this option.</p>
+</blockquote></li>
+<li><p>Select <strong>Import Project</strong> from the Getting Started
+page, or Right-Click in the Project Explorer and go to
+<code>Import -&gt; CCS Projects</code></p>
+<ol type="1">
+<li><p>Choose <strong>Select search-directory</strong> and enter the
+cc3200sdk path. This may also be found using the <strong>Browse</strong>
+option. If the default install location was used, it should be:
+<strong><code>C:\ti\CC3200SDK_1.5.0\cc3200sdk</code></strong></p></li>
+<li><p>Select the <code>blinky</code> project and click
+<strong>Finish</strong>.</p></li>
+</ol></li>
+<li><p>In Project Explorer, right-click on <code>blinky</code> and
+select <strong>Properties</strong>. Ensure that the <strong>Compiler
+version</strong> is set to <code>TI v20.x.x.LTS</code>.</p>
+<p>While you are here, you should explore other properties to
+familiarize yourself with the interface. For example, expand <strong>ARM
+Linker</strong> and select <strong>Basic Options</strong> in order to
+see the default heap and stack sizes for this project. When you are done
+examining project properties, click <strong>Cancel</strong> if you made
+no changes, or <strong>Apply and Close</strong> if you needed to update
+the compiler version.</p></li>
+<li><p>Build the <code>blinky</code> project. This can be done in a
+number of ways:</p>
+<ul>
+<li>Click the hammer icon while the <code>blinky</code> project is
+selected.</li>
+<li>Select <strong>Project &gt; Build Project</strong> while the
+<code>blinky</code> project is selected.</li>
+<li>Right-Click the <code>blinky</code> project and select <strong>Build
+Project</strong></li>
+</ul>
+<p>The project should build without any errors or warnings. If you
+encounter errors, first attempt to solve them by referring to the
+console output log and exercising your Google-Fu to search for
+solutions. If nothing seems to work, then ask the TA if you are still
+experiencing the problem.</p></li>
+<li><p>Connect the CC3200 LaunchPad to your host computer using the
+supplied USB cable.</p></li>
+<li><p>Click the bug icon or select <strong>Run &gt; Debug</strong> to
+lauch the Debug Perspective.</p>
+<p>The first time you attempt to run a program on the CC3200, you will
+get the following message:</p>
+<blockquote>
+<p><strong>You require a target configuration to start a debug session.
+Do you want to create a new target configuration file and open it in the
+editor?</strong></p>
+</blockquote>
+<p>Click <strong>Yes</strong>, then give the new Target Configuration
+file a name, such as ``cc3200.ccxml`.</p>
+<p>Click the box “<strong>Use shared location</strong>” so that this
+configuration file can be used for all of your projects in this
+workspace. Then click <strong>Finish</strong>.</p>
+<p>For the Connection, select <strong>Stellaris In-Circuit Debug
+Interface</strong> and select the box for “<strong>CC3200</strong>” for
+the board or device. Then scroll to the right of the window and select
+<strong>Save</strong>.</p>
+<p>You should now see <code>cc3200.ccxml</code> listed under the
+<code>User Defined</code> folder in the "Target Configurations" window.
+Make sure that <code>cc3200.ccxml</code> is selected as the
+<strong>default</strong> target configuration. Close the
+<code>cc3200.ccxml</code> window and click the bug icon or <strong>Run
+&gt; Debug</strong> again. When running in debug mode, your program will
+be loaded into the CC3200’s RAM. (Make sure that the LaunchPad is still
+connected to the PC via the USB cable.)</p></li>
+<li><p>Click on the green “<strong>Play</strong>” button icon or select
+<strong>Run &gt; Resume</strong> or type <strong>F8</strong> to run the
+program. You should see the red, yellow and green LEDs blink in a
+continuous sequence. Examine the program to see how it works.</p></li>
+</ol>
+<hr />
+<h3 id="lab-checkoff-task-1"><em>Lab Checkoff Task 1</em></h3>
+<p><strong>Make a simple modification to make the LEDs blink faster than
+in the default program. For example, you can easily make the LEDs blink
+two times to ten times faster with simple code modifications. Upload
+(Debug) the code again and verify that the program works as
+expected.</strong></p>
+<p><strong>Demonstrate the modification to your TA to receive checkoff.
+You may continue to the next part in the meantime.</strong></p>
+<hr />
+<h3 id="uart-demo-example">Uart Demo Example</h3>
+<ol type="1">
+<li><p>Follow steps 1 and 2 above to import the
+<strong>uart_demo</strong> project. Build the firmware as you did for
+<code>blinky</code> project, then upload the project via
+<strong>Debug</strong> on CCS. Do <em>not</em> hit the
+<strong>Play</strong> button yet.</p></li>
+<li><p>Open a serial terminal window to connect to the CC3200 via
+UART.</p>
+<ul>
+<li><p><strong>Windows</strong>: PuTTY or TeraTerm</p>
+<ol type="1">
+<li><p>To determine which COM port to connect to, open <strong>Windows
+Device Manager</strong>
+(<code>Start Menu -&gt; Windows System -&gt; Control Panel  -&gt; Hardware and Sound -&gt; Device Manager</code>)
+and expand <strong>Ports (COM &amp; LPT)</strong>. Note which COM Port
+corresponds to the CC3200.</p></li>
+<li><p>Configure terminal emulator with the corresponding COM port and
+set the baud rate to 115200</p></li>
+</ol>
+<p>Alternatively, in CCS itself:</p>
+<ol type="1">
+<li><p>Go to <code>View -&gt; Terminal</code> and click the small
+<code>Open a Terminal</code> Icon.</p></li>
+<li><p>Click the dropdown and select
+<code>Serial Terminal</code>.</p></li>
+<li><p>Choose the right COM port, and hit <code>OK</code></p></li>
+</ol></li>
+<li><p><strong>MacOS</strong>: cc3200tool in Terminal</p>
+<ol type="1">
+<li><p>Open Terminal, then enter the following commands:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="an">conda activate cc3200</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">cc3200tool term 115200</span></span></code></pre></div></li>
+<li><p>Use <code>Ctrl+B</code> to stop the terminal.</p></li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>: This assumes you have followed the install
+instructions for MacOS and installed cc3200tool in the cc3200 conda
+environment</p>
+</blockquote></li>
+</ul></li>
+<li><p>Once your terminal window is open, run the <code>uart_demo</code>
+program in the CCS Debug window. Verify that the program echoes text
+that you type into the terminal window using the keyboard.</p></li>
+</ol>
+<hr />
+<h2 id="part-ii-lab1-application-program-exercise">Part II: Lab1
+Application Program Exercise</h2>
+<p>In this part, you will develop a simple program that interfaces to a
+console window and to switches and LEDs on the CC3200 LaunchPad. You
+will also configure a signal on the P2 header as a general purpose
+output that you will control based on the switch inputs and verify on an
+oscilloscope. The complete program specifications will be presented
+later.</p>
+<ol type="1">
+<li><p><strong><u>Create a project in CCS</u></strong></p>
+<p>Instead of creating a new, empty project, it is easier to import an
+example project from the CC3200SDK and modify that project according to
+the new project specs. In this case, we recommend that you start with
+the <code>blinky</code> project since it is similar to the new project
+you will develop. Note that you cannot import <code>blinky</code> into
+your project when it is already there. However, you can rename the
+existing <code>blinky</code> project to a new name, such as
+<code>lab1-pt1</code>. This way, you could re-import the original
+<code>blinky</code> project into your workspace, if desired.</p></li>
+<li><p><strong><u>Configure the pins for your project using the TI
+SysConfig Tool</u></strong></p>
+<p>The <em>TI SysConfig tool</em> (formerly the TI Pin Mux tool) is a
+utility used to select the appropriate pin multiplexing configuration to
+satisfy the application requirements.</p>
+<p>This tool makes it easy to understand the various pin configuration
+options and to implement your desired pin configuration without error.
+You can use either the Cloud-hosted Pin Mux Utility or the stand-alone
+desktop SysConfig tool.</p>
+<p>For the purposes of this lab, the instructions will be for the
+desktop SysConfig tool. For information on using the TI Cloud-hosted
+tool, <a href="https://www.youtube.com/watch?v=Q8yby_i3N_M">refer to
+this video</a>.</p>
+<ol type="1">
+<li><p>Launch the TI SysConfig Tool from either the Start menu or the
+desktop icon, if it exists. Select <strong>CC3200</strong> as the device
+and click on the <strong>Start</strong> button.</p></li>
+<li><p>We will first configure the desired GPIO signals. For this
+project, we want to interface to the following devices/pins on the
+CC3200 LaunchPad: Red, Yellow and Green LEDs, SW2 and SW3, P18 on the P2
+header, and the UART Rx and Tx pins which interface to the console
+window. To determine which pins or GPIO signals you need to specify,
+consult the LaunchPad schematic (CC3200-LAUNCHXL_SCH_Rev4p1-a.pdf)
+available on the course website.</p>
+<p><strong>Note:</strong> <u>Make sure that you can verify the following
+signal names and pin numbers on the schematic</u>. (It will be very
+important that you consult this schematic when deciding which pins to
+use for hardware interfacing. Many of the pins that are brought to the
+headers are already being used on the LaunchPad board and are not
+actually available for general use.)</p>
+<table>
+<thead>
+<tr>
+<th>Signal Name</th>
+<th>Pin Number</th>
+<th>Device</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPIO_9</td>
+<td>64</td>
+<td>Red LED</td>
+</tr>
+<tr>
+<td>GPIO_10</td>
+<td>1</td>
+<td>Yellow LED</td>
+</tr>
+<tr>
+<td>GPIO_11</td>
+<td>2</td>
+<td>Green LED</td>
+</tr>
+<tr>
+<td>GPIO_13</td>
+<td>4</td>
+<td>SW3</td>
+</tr>
+<tr>
+<td>GPIO_22</td>
+<td>15</td>
+<td>SW2</td>
+</tr>
+<tr>
+<td>GPIO_28</td>
+<td>18</td>
+<td>P18 on P2 header</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Select the <strong>GPIO</strong> peripheral in the
+<strong>Peripherals</strong> tab on the left.</p></li>
+<li><p>Click on the <strong>Add</strong> button in the Requirements tab
+so that you can add GPIO signals.</p></li>
+<li><p>Unselect all the GPIO signals by unchecking the box labeled
+<strong>Signals</strong>; then, add the GPIO signals that you want to
+use in your project by checking the corresponding box and choosing the
+pin number from the dropdown box in the middle column.</p></li>
+<li><p>Select the I/O mode (Input, Output or Output OD (Open Drain)) for
+each of your signals from dropdown menu in the right-side column. In
+this design, the switches should drive input pins and outputs signals
+(<em>not</em> open drain outputs) will drive the LEDs and P18.</p></li>
+<li><p>Verify that the pin numbers match the ones in the table above. If
+they don’t match, use the pull-down option to select the correct pin
+number. Your GPIO section should look like the following screen-shot.
+(The name of the module is arbitrary.)</p>
+<div class="fig">
+    <img src="./media/lab1-gpio-pinmux-config.png" style="width:5in;height:auto" />
+    <span class="caption">PinMux Configuration of GPIO signals</span>
+</div>
+</li>
+<li><p>Next configure the UART peripheral. Note that you will need to
+configure the UART0_RX to pin number 57 and UART0_TX to pin number 55 as
+these are not the default pin assignments for these signals on the
+CC3200 LaunchPad. The lock icon shows that you have locked that pin
+number to the specified signal. For details, see the UART MUXING and the
+EMULATION sub-circuits on the CC3200 LaunchPad schematic. Your UART
+configuration should look similar to the screen-shot below.</p>
+<table>
+<thead>
+<tr>
+<th>Signal Name</th>
+<th>Pin Number</th>
+<th>Device</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UART0_RX</td>
+<td>57</td>
+<td>FTDI_TX</td>
+</tr>
+<tr>
+<td>UART0_TX</td>
+<td>55</td>
+<td>FTDI_RX</td>
+</tr>
+</tbody>
+</table>
+<div class="fig">
+    <img src="./media/lab1-uart-pinmux-config.png" style="width:5.5in;height:auto" />
+    <span class="caption">PinMux Configuration of UART signals</span>
+</div>
+</li>
+<li><p>Save your configuration to a different location from your project
+directory. For example, you can use the name <code>lab1</code> and the
+file will be stored as <code>lab1.syscfg</code>. You can open this file
+later with the SysConfig Tool to change your pin configuration instead
+of starting over.</p></li>
+<li><p>Save <code>pin_mux_config.c</code> and
+<code>pin_mux_config.h</code> to your project directory by clicking on
+the adjacent download/save button and navigating to the appropriate
+workspace directory.</p></li>
+<li><p>Remove the old <code>pinmux.c</code> and <code>pinmux.h</code>
+files from your project directory. In <code>main.c</code>, modify the
+<code>\#include</code> to use <code>pin_mux_config.h</code> instead of
+<code>pinmux.h</code>.</p>
+<div class="fig">
+    <img src="./media/lab1-pinmux-output.png" style="width:4in;height:auto" />
+    <span class="caption">SysConfig Downloadable Output Files</span>
+</div>
+</li>
+</ol></li>
+</ol>
+<hr />
+<h3 id="lab-checkoff-task-2"><em>Lab Checkoff Task 2</em></h3>
+<p><strong>Modify your program code to meet the application
+specifications:</strong></p>
+<ol type="1">
+<li><p>When your program starts, it should display a message on the
+console window (i.e. TeraTerm or other terminal emulator) with a header
+and usage instructions as shown below. A good example project to look at
+for basic UART functions is <code>uart_demo</code> in the CC3200SDK
+examples folder.</p>
+<pre><code>****************************************************
+
+CC3200 GPIO Application
+
+****************************************************
+
+****************************************************
+
+Push SW3 to start LED binary counting
+
+Push SW2 to blink LEDs on and off
+
+****************************************************</code></pre></li>
+<li><p>Your program should poll the SW3 and SW2 switches on the CC3200
+LaunchPad. When SW3 is pressed, you should start a binary counting
+sequence on the LEDs, counting from 000 – 111 <em>continuously</em> on
+the three LEDs. The count should be relatively slow so that you can see
+each count value easily. You should also print a message to the console
+“SW3 pressed”. This message should not be printed again until after SW2
+has been pressed.</p></li>
+<li><p>When SW2 is pressed, your program should blink the LEDs ON and
+OFF in unison. Again, the blink pattern should be relatively slow so
+that you can see each pattern clearly and easily. You should print the
+message “SW2 pressed” to the console. This message should not be printed
+again until after SW3 has been pressed.</p></li>
+<li><p>Set the output signal P18 high whenever SW2 is pressed and low
+whenever SW3 is pressed. You can verify this signal using an
+oscilloscope.</p></li>
+</ol>
+<blockquote>
+<p>NOTE: For polling the switches and controlling the outputs, you can
+use CC3200 Peripheral Driver Library APIs such as GPIOPinRead() and
+GPIOPinWrite(). The CC3200 Peripheral Driver Library User’s Guide can be
+found at</p>
+<p><a
+href="http://software-dl.ti.com/ecs/cc31xx/APIs/public/cc32xx_peripherals/latest/html/index.html">http://software-dl.ti.com/ecs/cc31xx/APIs/public/cc32xx_peripherals/latest/html/index.html</a></p>
+<p>Verify your program using the CCS Debug mode.</p>
+</blockquote>
+<p><strong>Demonstrate your application to your TA to receive checkoff.
+You may continue to the next part in the meantime.</strong></p>
+<hr />
+<h2 id="part-iii-programming-flash-memory">Part III: Programming Flash
+Memory</h2>
+<p>In this part, you will learn how to program the external flash memory
+so that the program will remain in non-volatile memory through power
+cycles. This section will demonstrate how to load the
+<em><strong>blinky</strong></em> program onto the external flash device
+on the CC3200 LaunchPad.</p>
+<h3 id="windows-ccs-uniflash">Windows: CCS UniFlash</h3>
+<ol type="1">
+<li><p>On launching the UniFlash tool, you will see a window as shown
+below. To start, click on the <em>New Target Configuration</em> link
+under the <strong>Quick Start Guide</strong> heading, or under the
+<code>File \&gt; New Configuration</code> on the menu bar. This should
+open up the new configuration window.</p>
+<div class="fig">
+    <img src="./media/lab1-uniflash-launch.png" style="width:6in;height:auto" />
+    <span class="caption">Launch Screen of the CCS UniFlash tool</span>
+</div>
+</li>
+<li><p>From the Connection drop down menu, select the ‘<strong>CC3x
+Serial(UART) Interface</strong>’ option, and the ‘<strong>SimpleLink
+Wifi CC3100/CC3200</strong>’ for the Board or Device in the screen-shot
+below. After the selections are made, click <strong>OK</strong>.</p>
+<div class="fig">
+    <img src="./media/lab1-uniflash-new-config.png" style="width:6in;height:auto" />
+    <span class="caption">New Configuration Window</span>
+</div>
+</li>
+<li><p>This will open up the main screen shown below. First, the correct
+COM Port for the device must be identified to the UniFlash tool. If you
+are unsure of which COM Port to use, plug in the CC3200 Launchpad and
+open up the Device Manager to check. In this example, the CC3200
+Launcpad was on COM Port 4. Enter the COM Port number into the text box,
+and then select the <code>/sys/mcuimg.bin</code> option on
+<strong>System Files</strong> on the left of the screen.</p>
+<div class="fig">
+    <img src="./media/lab1-uniflash-setup-and-ctrl.png" style="width:6in;height:auto" />
+    <span class="caption"> CCS UniFlash Flash Setup and Control Screen</span>
+</div>
+</li>
+<li><p>This panel will allow you to identify the compiled
+<code>.bin</code> file that will be loaded into the flash memory. Click
+on the <strong>Browse</strong> button next to the <strong>Url</strong>
+text box, and locate the <code>.bin</code> file that you would like to
+load into flash. For this example, the compiled <code>blinky</code>
+example, <code>blinky.bin</code>, was selected from the CCS workspace.
+In addition, make sure the <strong>Update</strong>, and
+<strong>Verify</strong> check boxes are selected. The UniFlash tool
+should now be ready to flash the CC3200 LaunchPad hardware.</p>
+<div class="fig">
+    <img src="./media/lab1-uniflash-system-files.png" style="width:6in;height:auto" />
+    <span class="caption">System File Options Screen</span>
+</div>
+</li>
+<li><p>Before connecting the CC3200 Launchpad to the computer, a jumper
+will need to be placed on <strong>SOP2</strong> as shown below. This
+will allow the flash memory to be programmed by CCS UniFlash, and will
+prevent the previously flashed program from being executed.</p>
+<div class="fig">
+    <img src="./media/lab1-cc3200-jumper-config.png" style="width:6;height:auto" />
+    <span class="caption">
+        <p>
+            Minimum Jumper Configuration for Flashing the CC3200
+            <br>
+            Source: Figure 1 of the <em>CC3200 SimpleLink Wi-Fi and IoT 
+            Solution With MCU LaunchPad Getting Started Guide</em>
+        </p>
+    </span>
+</div>
+</li>
+<li><p>Once you have verified the jumpers are correctly set, connect the
+Launchpad to the computer, and return to the <strong>Flash Setup and
+Control</strong> panel that was shown earlier and click the
+<strong>Program</strong> button. This should successfully program the
+board.</p>
+<p>To see the program run, disconnect the Launchpad from the computer,
+remove the SOP2 jumper, then reconnect the board to the computer.</p>
+<blockquote>
+<p>Do not lose the jumper since you will often need to use it.</p>
+</blockquote>
+<p>The <code>blinky.bin</code> file should now run at launch instead of
+the out of the box demo program (or whatever program was previously
+programmed in flash). If this does not work, double check that the
+necessary jumpers are placed on the Launchpad and that the options on
+the <code>/sys/mcuimg.bin</code> panel are set correctly.</p></li>
+</ol>
+<h3 id="macos-cc3200tool">MacOS: cc3200tool</h3>
+<ol type="1">
+<li><p>Open a Terminal and navigate to the folder where your
+<code>blinky.bin</code> file is saved. Then run the following
+commands:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate cc3200</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">cc3200tool</span> <span class="at">--sop2</span> <span class="dt">\~</span>dtr <span class="at">--reset</span> prompt <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    format_flash <span class="at">--size</span> 1M <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    write_file blinky.bin /sys/mcuimg.bin</span></code></pre></div>
+<p>Follow the prompts that the tool prints to the console. Here is a
+sample of what you should see:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">// testing</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">$ cc3200tool</span><span class="at"> --sop2</span> \~dtr<span class="at"> --reset</span> prompt <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>format_flash<span class="at"> --size</span> 1M <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>write_file uart_demo.bin /sys/mcuimg.bin</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:37,850 -- Connecting to target...</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="an">Reset the device with SOP2 asserted and press Enter</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,141 -- Connected, reading version...</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,156 -- connected to target</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,156 -- Version: CC3x00VersionInfo((0, 4, 1, 2), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (16, 0, 0, 0))</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,156 -- This is a CC3200 device</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,156 -- Switching to NWP bootloader...</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,170 -- Switching UART to APPS...</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,181 -- Resetting communications ...</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:48,422 -- timed out while waiting for ack</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:48,679 -- Uploading rbtl3100s.dll...</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:48,683 -- Getting storage list...</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:49,721 -- APPS version: CC3x00VersionInfo((0, 4, 0, 2), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (16, 0, 0, 0))</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:49,721 -- Formatting flash with size=1024</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:50,746 -- Uploading file uart_demo.bin -&gt; /sys/mcuimg.bin [13408, disk=13408]...</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="an">....</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,243 -- Getting storage info...</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,255 -- storage #2 info bytes: 0x10, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,255 -- Getting storage list...</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,282 -- Reading raw storage #2 start 0x0, size 0x2000...</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="an">................................</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,819 -- [1] detected a valid FAT revision: 3</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,819 -- Getting storage list...</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,845 -- Reading raw storage #2 start 0x1774, size 0x2774...</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="an">........................................</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:52,501 -- selected FAT revision: 3 (active)</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:52,502 -- FAT r3, num files: 1, used/free blocks: 9/247</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:52,502 -- All commands done, bye.</span></span></code></pre></div></li>
+</ol>
+<blockquote>
+<p>The <code>blinky.bin</code> file should be located in a subfolder of
+your project directory in your workspace.</p>
+</blockquote>
+<hr />
+<h3 id="lab-checkoff-task-3"><em>Lab Checkoff Task 3</em></h3>
+<p><strong>Use the CCS UniFlash utility to program your application into
+the on-board serial Flash chip.</strong></p>
+<p>Once your application program from Part II works, load it into the
+serial Flash chip on the CC3200 LaunchPad so that your program can run
+without downloading the code from CCS into RAM in Debug Mode.</p>
+<p>To test your program, power the LaunchPad by connecting the USB cable
+to a host PC. Then open a terminal window using TeraTerm or PuTTY on the
+appropriate COM port. To see your header message, press the Reset button
+on the LaunchPad to restart your application program.</p>
+<p><strong>Demonstrate your working program to your TA to receive
+checkoff</strong></p>
+</article>
+</html>

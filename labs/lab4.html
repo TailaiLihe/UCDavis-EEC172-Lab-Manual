@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lab 4 - Introduction to AWS and RESTful APIs</title>
+  <!-- <link rel="stylesheet" href="assets/github-markdown-light.css" /> -->
+  <style>
+    /*github markdown light*/
+
+    .markdown-body {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      margin: 0;
+      color: #1F2328;
+      background-color: #ffffff;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+      font-size: 16px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .markdown-body .octicon {
+      display: inline-block;
+      fill: currentColor;
+      vertical-align: text-bottom;
+    }
+
+    .markdown-body h1:hover .anchor .octicon-link:before,
+    .markdown-body h2:hover .anchor .octicon-link:before,
+    .markdown-body h3:hover .anchor .octicon-link:before,
+    .markdown-body h4:hover .anchor .octicon-link:before,
+    .markdown-body h5:hover .anchor .octicon-link:before,
+    .markdown-body h6:hover .anchor .octicon-link:before {
+      width: 16px;
+      height: 16px;
+      content: ' ';
+      display: inline-block;
+      background-color: currentColor;
+      -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+      mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+    }
+
+    .markdown-body details,
+    .markdown-body figcaption,
+    .markdown-body figure {
+      display: block;
+    }
+
+    .markdown-body summary {
+      display: list-item;
+    }
+
+    .markdown-body [hidden] {
+      display: none !important;
+    }
+
+    .markdown-body a {
+      background-color: transparent;
+      color: #0969da;
+      text-decoration: none;
+    }
+
+    .markdown-body abbr[title] {
+      border-bottom: none;
+      -webkit-text-decoration: underline dotted;
+      text-decoration: underline dotted;
+    }
+
+    .markdown-body b,
+    .markdown-body strong {
+      font-weight: 600;
+    }
+
+    .markdown-body dfn {
+      font-style: italic;
+    }
+
+    .markdown-body h1 {
+      margin: .67em 0;
+      font-weight: 600;
+      padding-bottom: .3em;
+      font-size: 2em;
+      border-bottom: 1px solid hsla(210,18%,87%,1);
+    }
+
+    .markdown-body mark {
+      background-color: #fff8c5;
+      color: #1F2328;
+    }
+
+    .markdown-body small {
+      font-size: 90%;
+    }
+
+    .markdown-body sub,
+    .markdown-body sup {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+    }
+
+    .markdown-body sub {
+      bottom: -0.25em;
+    }
+
+    .markdown-body sup {
+      top: -0.5em;
+    }
+
+    .markdown-body img {
+      border-style: none;
+      max-width: 100%;
+      box-sizing: content-box;
+      background-color: #ffffff;
+    }
+
+    .markdown-body code,
+    .markdown-body kbd,
+    .markdown-body pre,
+    .markdown-body samp {
+      font-family: monospace;
+      font-size: 1em;
+    }
+
+    .markdown-body figure {
+      margin: 1em 40px;
+    }
+
+    .markdown-body hr {
+      box-sizing: content-box;
+      overflow: hidden;
+      background: transparent;
+      border-bottom: 1px solid hsla(210,18%,87%,1);
+      height: .25em;
+      padding: 0;
+      margin: 24px 0;
+      background-color: #d0d7de;
+      border: 0;
+    }
+
+    .markdown-body input {
+      font: inherit;
+      margin: 0;
+      overflow: visible;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .markdown-body [type=button],
+    .markdown-body [type=reset],
+    .markdown-body [type=submit] {
+      -webkit-appearance: button;
+      appearance: button;
+    }
+
+    .markdown-body [type=checkbox],
+    .markdown-body [type=radio] {
+      box-sizing: border-box;
+      padding: 0;
+    }
+
+    .markdown-body [type=number]::-webkit-inner-spin-button,
+    .markdown-body [type=number]::-webkit-outer-spin-button {
+      height: auto;
+    }
+
+    .markdown-body [type=search]::-webkit-search-cancel-button,
+    .markdown-body [type=search]::-webkit-search-decoration {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .markdown-body ::-webkit-input-placeholder {
+      color: inherit;
+      opacity: .54;
+    }
+
+    .markdown-body ::-webkit-file-upload-button {
+      -webkit-appearance: button;
+      appearance: button;
+      font: inherit;
+    }
+
+    .markdown-body a:hover {
+      text-decoration: underline;
+    }
+
+    .markdown-body ::placeholder {
+      color: #6e7781;
+      opacity: 1;
+    }
+
+    .markdown-body hr::before {
+      display: table;
+      content: "";
+    }
+
+    .markdown-body hr::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+
+    .markdown-body table {
+      border-spacing: 0;
+      border-collapse: collapse;
+      display: block;
+      width: max-content;
+      max-width: 100%;
+      overflow: auto;
+    }
+
+    .markdown-body td,
+    .markdown-body th {
+      padding: 0;
+    }
+
+    .markdown-body details summary {
+      cursor: pointer;
+    }
+
+    .markdown-body details:not([open])>*:not(summary) {
+      display: none !important;
+    }
+
+    .markdown-body a:focus,
+    .markdown-body [role=button]:focus,
+    .markdown-body input[type=radio]:focus,
+    .markdown-body input[type=checkbox]:focus {
+      outline: 2px solid #0969da;
+      outline-offset: -2px;
+      box-shadow: none;
+    }
+
+    .markdown-body a:focus:not(:focus-visible),
+    .markdown-body [role=button]:focus:not(:focus-visible),
+    .markdown-body input[type=radio]:focus:not(:focus-visible),
+    .markdown-body input[type=checkbox]:focus:not(:focus-visible) {
+      outline: solid 1px transparent;
+    }
+
+    .markdown-body a:focus-visible,
+    .markdown-body [role=button]:focus-visible,
+    .markdown-body input[type=radio]:focus-visible,
+    .markdown-body input[type=checkbox]:focus-visible {
+      outline: 2px solid #0969da;
+      outline-offset: -2px;
+      box-shadow: none;
+    }
+
+    .markdown-body a:not([class]):focus,
+    .markdown-body a:not([class]):focus-visible,
+    .markdown-body input[type=radio]:focus,
+    .markdown-body input[type=radio]:focus-visible,
+    .markdown-body input[type=checkbox]:focus,
+    .markdown-body input[type=checkbox]:focus-visible {
+      outline-offset: 0;
+    }
+
+    .markdown-body kbd {
+      display: inline-block;
+      padding: 3px 5px;
+      font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+      line-height: 10px;
+      color: #1F2328;
+      vertical-align: middle;
+      background-color: #f6f8fa;
+      border: solid 1px rgba(175,184,193,0.2);
+      border-bottom-color: rgba(175,184,193,0.2);
+      border-radius: 6px;
+      box-shadow: inset 0 -1px 0 rgba(175,184,193,0.2);
+    }
+
+    .markdown-body h1,
+    .markdown-body h2,
+    .markdown-body h3,
+    .markdown-body h4,
+    .markdown-body h5,
+    .markdown-body h6 {
+      margin-top: 24px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .markdown-body h2 {
+      font-weight: 600;
+      padding-bottom: .3em;
+      font-size: 1.5em;
+      border-bottom: 1px solid hsla(210,18%,87%,1);
+    }
+
+    .markdown-body h3 {
+      font-weight: 600;
+      font-size: 1.25em;
+    }
+
+    .markdown-body h4 {
+      font-weight: 600;
+      font-size: 1em;
+    }
+
+    .markdown-body h5 {
+      font-weight: 600;
+      font-size: .875em;
+    }
+
+    .markdown-body h6 {
+      font-weight: 600;
+      font-size: .85em;
+      color: #656d76;
+    }
+
+    .markdown-body p {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .markdown-body blockquote {
+      margin: 0;
+      padding: 0 1em;
+      color: #656d76;
+      border-left: .25em solid #d0d7de;
+    }
+
+    .markdown-body ul,
+    .markdown-body ol {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: 2em;
+    }
+
+    .markdown-body ol ol,
+    .markdown-body ul ol {
+      list-style-type: lower-roman;
+    }
+
+    .markdown-body ul ul ol,
+    .markdown-body ul ol ol,
+    .markdown-body ol ul ol,
+    .markdown-body ol ol ol {
+      list-style-type: lower-alpha;
+    }
+
+    .markdown-body dd {
+      margin-left: 0;
+    }
+
+    .markdown-body tt,
+    .markdown-body code,
+    .markdown-body samp {
+      font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+      font-size: 12px;
+    }
+
+    .markdown-body pre {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+      font-size: 12px;
+      word-wrap: normal;
+    }
+
+    .markdown-body .octicon {
+      display: inline-block;
+      overflow: visible !important;
+      vertical-align: text-bottom;
+      fill: currentColor;
+    }
+
+    .markdown-body input::-webkit-outer-spin-button,
+    .markdown-body input::-webkit-inner-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .markdown-body .mr-2 {
+      margin-right: 8px !important;
+    }
+
+    .markdown-body::before {
+      display: table;
+      content: "";
+    }
+
+    .markdown-body::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+
+    .markdown-body>*:first-child {
+      margin-top: 0 !important;
+    }
+
+    .markdown-body>*:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    .markdown-body a:not([href]) {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .markdown-body .absent {
+      color: #d1242f;
+    }
+
+    .markdown-body .anchor {
+      float: left;
+      padding-right: 4px;
+      margin-left: -20px;
+      line-height: 1;
+    }
+
+    .markdown-body .anchor:focus {
+      outline: none;
+    }
+
+    .markdown-body p,
+    .markdown-body blockquote,
+    .markdown-body ul,
+    .markdown-body ol,
+    .markdown-body dl,
+    .markdown-body table,
+    .markdown-body pre,
+    .markdown-body details {
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    .markdown-body blockquote>:first-child {
+      margin-top: 0;
+    }
+
+    .markdown-body blockquote>:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body h1 .octicon-link,
+    .markdown-body h2 .octicon-link,
+    .markdown-body h3 .octicon-link,
+    .markdown-body h4 .octicon-link,
+    .markdown-body h5 .octicon-link,
+    .markdown-body h6 .octicon-link {
+      color: #1F2328;
+      vertical-align: middle;
+      visibility: hidden;
+    }
+
+    .markdown-body h1:hover .anchor,
+    .markdown-body h2:hover .anchor,
+    .markdown-body h3:hover .anchor,
+    .markdown-body h4:hover .anchor,
+    .markdown-body h5:hover .anchor,
+    .markdown-body h6:hover .anchor {
+      text-decoration: none;
+    }
+
+    .markdown-body h1:hover .anchor .octicon-link,
+    .markdown-body h2:hover .anchor .octicon-link,
+    .markdown-body h3:hover .anchor .octicon-link,
+    .markdown-body h4:hover .anchor .octicon-link,
+    .markdown-body h5:hover .anchor .octicon-link,
+    .markdown-body h6:hover .anchor .octicon-link {
+      visibility: visible;
+    }
+
+    .markdown-body h1 tt,
+    .markdown-body h1 code,
+    .markdown-body h2 tt,
+    .markdown-body h2 code,
+    .markdown-body h3 tt,
+    .markdown-body h3 code,
+    .markdown-body h4 tt,
+    .markdown-body h4 code,
+    .markdown-body h5 tt,
+    .markdown-body h5 code,
+    .markdown-body h6 tt,
+    .markdown-body h6 code {
+      padding: 0 .2em;
+      font-size: inherit;
+    }
+
+    .markdown-body summary h1,
+    .markdown-body summary h2,
+    .markdown-body summary h3,
+    .markdown-body summary h4,
+    .markdown-body summary h5,
+    .markdown-body summary h6 {
+      display: inline-block;
+    }
+
+    .markdown-body summary h1 .anchor,
+    .markdown-body summary h2 .anchor,
+    .markdown-body summary h3 .anchor,
+    .markdown-body summary h4 .anchor,
+    .markdown-body summary h5 .anchor,
+    .markdown-body summary h6 .anchor {
+      margin-left: -40px;
+    }
+
+    .markdown-body summary h1,
+    .markdown-body summary h2 {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .markdown-body ul.no-list,
+    .markdown-body ol.no-list {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .markdown-body ol[type="a s"] {
+      list-style-type: lower-alpha;
+    }
+
+    .markdown-body ol[type="A s"] {
+      list-style-type: upper-alpha;
+    }
+
+    .markdown-body ol[type="i s"] {
+      list-style-type: lower-roman;
+    }
+
+    .markdown-body ol[type="I s"] {
+      list-style-type: upper-roman;
+    }
+
+    .markdown-body ol[type="1"] {
+      list-style-type: decimal;
+    }
+
+    .markdown-body div>ol:not([type]) {
+      list-style-type: decimal;
+    }
+
+    .markdown-body ul ul,
+    .markdown-body ul ol,
+    .markdown-body ol ol,
+    .markdown-body ol ul {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .markdown-body li>p {
+      margin-top: 16px;
+    }
+
+    .markdown-body li+li {
+      margin-top: .25em;
+    }
+
+    .markdown-body dl {
+      padding: 0;
+    }
+
+    .markdown-body dl dt {
+      padding: 0;
+      margin-top: 16px;
+      font-size: 1em;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .markdown-body dl dd {
+      padding: 0 16px;
+      margin-bottom: 16px;
+    }
+
+    .markdown-body table th {
+      font-weight: 600;
+    }
+
+    .markdown-body table th,
+    .markdown-body table td {
+      padding: 6px 13px;
+      border: 1px solid #d0d7de;
+    }
+
+    .markdown-body table td>:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body table tr {
+      background-color: #ffffff;
+      border-top: 1px solid hsla(210,18%,87%,1);
+    }
+
+    .markdown-body table tr:nth-child(2n) {
+      background-color: #f6f8fa;
+    }
+
+    .markdown-body table img {
+      background-color: transparent;
+    }
+
+    .markdown-body img[align=right] {
+      padding-left: 20px;
+    }
+
+    .markdown-body img[align=left] {
+      padding-right: 20px;
+    }
+
+    .markdown-body .emoji {
+      max-width: none;
+      vertical-align: text-top;
+      background-color: transparent;
+    }
+
+    .markdown-body span.frame {
+      display: block;
+      overflow: hidden;
+    }
+
+    .markdown-body span.frame>span {
+      display: block;
+      float: left;
+      width: auto;
+      padding: 7px;
+      margin: 13px 0 0;
+      overflow: hidden;
+      border: 1px solid #d0d7de;
+    }
+
+    .markdown-body span.frame span img {
+      display: block;
+      float: left;
+    }
+
+    .markdown-body span.frame span span {
+      display: block;
+      padding: 5px 0 0;
+      clear: both;
+      color: #1F2328;
+    }
+
+    .markdown-body span.align-center {
+      display: block;
+      overflow: hidden;
+      clear: both;
+    }
+
+    .markdown-body span.align-center>span {
+      display: block;
+      margin: 13px auto 0;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .markdown-body span.align-center span img {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .markdown-body span.align-right {
+      display: block;
+      overflow: hidden;
+      clear: both;
+    }
+
+    .markdown-body span.align-right>span {
+      display: block;
+      margin: 13px 0 0;
+      overflow: hidden;
+      text-align: right;
+    }
+
+    .markdown-body span.align-right span img {
+      margin: 0;
+      text-align: right;
+    }
+
+    .markdown-body span.float-left {
+      display: block;
+      float: left;
+      margin-right: 13px;
+      overflow: hidden;
+    }
+
+    .markdown-body span.float-left span {
+      margin: 13px 0 0;
+    }
+
+    .markdown-body span.float-right {
+      display: block;
+      float: right;
+      margin-left: 13px;
+      overflow: hidden;
+    }
+
+    .markdown-body span.float-right>span {
+      display: block;
+      margin: 13px auto 0;
+      overflow: hidden;
+      text-align: right;
+    }
+
+    .markdown-body code,
+    .markdown-body tt {
+      padding: .2em .4em;
+      margin: 0;
+      font-size: 85%;
+      white-space: break-spaces;
+      background-color: rgba(175,184,193,0.2);
+      border-radius: 6px;
+    }
+
+    .markdown-body code br,
+    .markdown-body tt br {
+      display: none;
+    }
+
+    .markdown-body del code {
+      text-decoration: inherit;
+    }
+
+    .markdown-body samp {
+      font-size: 85%;
+    }
+
+    .markdown-body pre code {
+      font-size: 100%;
+    }
+
+    .markdown-body pre>code {
+      padding: 0;
+      margin: 0;
+      word-break: normal;
+      white-space: pre;
+      background: transparent;
+      border: 0;
+    }
+
+    .markdown-body .highlight {
+      margin-bottom: 16px;
+    }
+
+    .markdown-body .highlight pre {
+      margin-bottom: 0;
+      word-break: normal;
+    }
+
+    .markdown-body .highlight pre,
+    .markdown-body pre {
+      padding: 16px;
+      overflow: auto;
+      font-size: 85%;
+      line-height: 1.45;
+      color: #1F2328;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+    }
+
+    .markdown-body pre code,
+    .markdown-body pre tt {
+      display: inline;
+      max-width: auto;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      line-height: inherit;
+      word-wrap: normal;
+      background-color: transparent;
+      border: 0;
+    }
+
+    .markdown-body .csv-data td,
+    .markdown-body .csv-data th {
+      padding: 5px;
+      overflow: hidden;
+      font-size: 12px;
+      line-height: 1;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .markdown-body .csv-data .blob-num {
+      padding: 10px 8px 9px;
+      text-align: right;
+      background: #ffffff;
+      border: 0;
+    }
+
+    .markdown-body .csv-data tr {
+      border-top: 0;
+    }
+
+    .markdown-body .csv-data th {
+      font-weight: 600;
+      background: #f6f8fa;
+      border-top: 0;
+    }
+
+    .markdown-body [data-footnote-ref]::before {
+      content: "[";
+    }
+
+    .markdown-body [data-footnote-ref]::after {
+      content: "]";
+    }
+
+    .markdown-body .footnotes {
+      font-size: 12px;
+      color: #656d76;
+      border-top: 1px solid #d0d7de;
+    }
+
+    .markdown-body .footnotes ol {
+      padding-left: 16px;
+    }
+
+    .markdown-body .footnotes ol ul {
+      display: inline-block;
+      padding-left: 16px;
+      margin-top: 16px;
+    }
+
+    .markdown-body .footnotes li {
+      position: relative;
+    }
+
+    .markdown-body .footnotes li:target::before {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      bottom: -8px;
+      left: -24px;
+      pointer-events: none;
+      content: "";
+      border: 2px solid #0969da;
+      border-radius: 6px;
+    }
+
+    .markdown-body .footnotes li:target {
+      color: #1F2328;
+    }
+
+    .markdown-body .footnotes .data-footnote-backref g-emoji {
+      font-family: monospace;
+    }
+
+    .markdown-body .pl-c {
+      color: #57606a;
+    }
+
+    .markdown-body .pl-c1,
+    .markdown-body .pl-s .pl-v {
+      color: #0550ae;
+    }
+
+    .markdown-body .pl-e,
+    .markdown-body .pl-en {
+      color: #6639ba;
+    }
+
+    .markdown-body .pl-smi,
+    .markdown-body .pl-s .pl-s1 {
+      color: #24292f;
+    }
+
+    .markdown-body .pl-ent {
+      color: #116329;
+    }
+
+    .markdown-body .pl-k {
+      color: #cf222e;
+    }
+
+    .markdown-body .pl-s,
+    .markdown-body .pl-pds,
+    .markdown-body .pl-s .pl-pse .pl-s1,
+    .markdown-body .pl-sr,
+    .markdown-body .pl-sr .pl-cce,
+    .markdown-body .pl-sr .pl-sre,
+    .markdown-body .pl-sr .pl-sra {
+      color: #0a3069;
+    }
+
+    .markdown-body .pl-v,
+    .markdown-body .pl-smw {
+      color: #953800;
+    }
+
+    .markdown-body .pl-bu {
+      color: #82071e;
+    }
+
+    .markdown-body .pl-ii {
+      color: #f6f8fa;
+      background-color: #82071e;
+    }
+
+    .markdown-body .pl-c2 {
+      color: #f6f8fa;
+      background-color: #cf222e;
+    }
+
+    .markdown-body .pl-sr .pl-cce {
+      font-weight: bold;
+      color: #116329;
+    }
+
+    .markdown-body .pl-ml {
+      color: #3b2300;
+    }
+
+    .markdown-body .pl-mh,
+    .markdown-body .pl-mh .pl-en,
+    .markdown-body .pl-ms {
+      font-weight: bold;
+      color: #0550ae;
+    }
+
+    .markdown-body .pl-mi {
+      font-style: italic;
+      color: #24292f;
+    }
+
+    .markdown-body .pl-mb {
+      font-weight: bold;
+      color: #24292f;
+    }
+
+    .markdown-body .pl-md {
+      color: #82071e;
+      background-color: #ffebe9;
+    }
+
+    .markdown-body .pl-mi1 {
+      color: #116329;
+      background-color: #dafbe1;
+    }
+
+    .markdown-body .pl-mc {
+      color: #953800;
+      background-color: #ffd8b5;
+    }
+
+    .markdown-body .pl-mi2 {
+      color: #eaeef2;
+      background-color: #0550ae;
+    }
+
+    .markdown-body .pl-mdr {
+      font-weight: bold;
+      color: #8250df;
+    }
+
+    .markdown-body .pl-ba {
+      color: #57606a;
+    }
+
+    .markdown-body .pl-sg {
+      color: #8c959f;
+    }
+
+    .markdown-body .pl-corl {
+      text-decoration: underline;
+      color: #0a3069;
+    }
+
+    .markdown-body g-emoji {
+      display: inline-block;
+      min-width: 1ch;
+      font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      font-size: 1em;
+      font-style: normal !important;
+      font-weight: 400;
+      line-height: 1;
+      vertical-align: -0.075em;
+    }
+
+    .markdown-body g-emoji img {
+      width: 1em;
+      height: 1em;
+    }
+
+    .markdown-body .task-list-item {
+      list-style-type: none;
+    }
+
+    .markdown-body .task-list-item label {
+      font-weight: 400;
+    }
+
+    .markdown-body .task-list-item.enabled label {
+      cursor: pointer;
+    }
+
+    .markdown-body .task-list-item+.task-list-item {
+      margin-top: 4px;
+    }
+
+    .markdown-body .task-list-item .handle {
+      display: none;
+    }
+
+    .markdown-body .task-list-item-checkbox {
+      margin: 0 .2em .25em -1.4em;
+      vertical-align: middle;
+    }
+
+    .markdown-body .contains-task-list:dir(rtl) .task-list-item-checkbox {
+      margin: 0 -1.6em .25em .2em;
+    }
+
+    .markdown-body .contains-task-list {
+      position: relative;
+    }
+
+    .markdown-body .contains-task-list:hover .task-list-item-convert-container,
+    .markdown-body .contains-task-list:focus-within .task-list-item-convert-container {
+      display: block;
+      width: auto;
+      height: 24px;
+      overflow: visible;
+      clip: auto;
+    }
+
+    .markdown-body ::-webkit-calendar-picker-indicator {
+      filter: invert(50%);
+    }
+
+    .markdown-body .markdown-alert {
+      padding: 8px 16px;
+      margin-bottom: 16px;
+      color: inherit;
+      border-left: .25em solid #d0d7de;
+    }
+
+    .markdown-body .markdown-alert>:first-child {
+      margin-top: 0;
+    }
+
+    .markdown-body .markdown-alert>:last-child {
+      margin-bottom: 0;
+    }
+
+    .markdown-body .markdown-alert .markdown-alert-title {
+      display: flex;
+      font-weight: 500;
+      align-items: center;
+      line-height: 1;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-note {
+      border-left-color: #0969da;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-note .markdown-alert-title {
+      color: #0969da;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-important {
+      border-left-color: #8250df;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-important .markdown-alert-title {
+      color: #8250df;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-warning {
+      border-left-color: #9a6700;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-warning .markdown-alert-title {
+      color: #9a6700;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-tip {
+      border-left-color: #1f883d;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-tip .markdown-alert-title {
+      color: #1a7f37;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-caution {
+      border-left-color: #cf222e;
+    }
+
+    .markdown-body .markdown-alert.markdown-alert-caution .markdown-alert-title {
+      color: #d1242f;
+    }
+
+    /*end github markdown light*/
+
+        /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: auto;
+        padding: 45px;
+    }
+
+    div.fig {
+      vertical-align: top;
+      /* display: inline-block; */
+      display: block;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      width: auto;
+    }
+
+    .caption {
+      display: block;
+    }
+
+    @media (max-width: 767px) {
+        .markdown-body {
+            padding: 15px;
+        }
+    }
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<article class="markdown-body">
+<header id="title-block-header">
+<h1 class="title">Lab 4 - Introduction to AWS and RESTful APIs</h1>
+</header>
+<h2 id="overview">Overview</h2>
+<p>In this lab, you will explore a RESTful API and use it to connect
+with Amazon Web Services (AWS). First, you will create a ‘thing’ in AWS
+and use the HTTP GET command to retrieve status information about your
+thing. You will then use your code from Lab 3 to compose messages with
+an IR remote, which you will send to AWS using the HTTP POST command.
+You will use a rule in AWS to send the text to your email using Amazon’s
+Simple Notification Service (SNS). Much of the code you will need for
+accessing AWS will be provided to you. You will need to understand it at
+a high-level and modify it for your specific AWS account.</p>
+<p>Please watch the video <a
+href="https://www.youtube.com/watch?v=tTazcL61JG8">AWS IoT Getting
+Started</a> to understand the basics of AWS IoT.</p>
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>At the end of this lab, students should be able to:</p>
+<ul>
+<li>Explain at a high-level the AWS IoT model and how embedded devices
+fit into it</li>
+<li>Understand and Utilize an HTTP RESTful API</li>
+<li>Send data from a device to a user via Amazon's Simple Notification
+Service</li>
+<li>Recognize the role and necessity of key exchange and certification
+in network security</li>
+<li>Understand how the physical device can trigger actions on AWS via
+shadow updates</li>
+</ul>
+<h2 id="requirements-and-dependencies">Requirements and
+Dependencies</h2>
+<h3 id="software-requirements">Software Requirements</h3>
+<ul>
+<li>Amazon AWS account<sup>1</sup></li>
+<li><a href="https://www.openssl.org">OpenSSL</a>
+=v1.1.1<sup>2</sup></li>
+</ul>
+<blockquote>
+<p>[1]: You can get a 1 year free trial account, and only 1 is needed
+per team</p>
+</blockquote>
+<blockquote>
+<p>[2]: OpenSSL is necessary to convert <code>.der</code> certificates
+from the <code>.pem</code> format. We have already provided the RootCA
+<code>.der</code> certificate on Canvas, but you will need to do this
+for the unique certificates generated for your device. <strong>You MUST
+use OpenSSL Version 1.1.1</strong>.</p>
+</blockquote>
+<h2 id="prelab-aws-iot-and-rest-apis">Prelab: AWS IoT and REST APIs</h2>
+<p>This lab is primarily an introduction to using RESTful APIs and the
+AWS IoT ecosystem. REST APIs are extremely common for making use of
+third-party services, and are often a crucial part of IoT devices. AWS
+IoT is a powerful industry IoT ecosystem that many real products make
+use of. Both, however, have a bit of a learning curve, and conducting
+thorough self-study on both technologies and reading the documentation
+is crucial for understanding the interaction model between your device
+and the online service.</p>
+<p>As per usual, we provide some light background on both topics, but it
+is critical that you conduct your own research to solidify your
+understanding for the prelab and lab.</p>
+<h3 id="prelab-objectives">Prelab Objectives</h3>
+<p>Students should be able to at minimum:</p>
+<ul>
+<li>identify the interaction model between AWS Device Shadows, Services,
+and the device iteslf</li>
+<li>understand what HTTP requests can be used on the shadow and how the
+shadow can be modified</li>
+<li>understand the difference between a physical device's state and the
+device shadow state</li>
+</ul>
+<p>ideally:</p>
+<ul>
+<li>Predict the device and shadow state after a series of events have
+occured</li>
+<li>fix logical synchronization problems with device and its shadow</li>
+</ul>
+<h3 id="rest-apis">REST APIs</h3>
+<p><strong>REST</strong>, or Representational State Transfer, is a
+standardized architecture for creating web services that maps onto the
+widely used Hypertext Transfer Protocol (<strong>HTTP</strong>).
+Although not as optimized for low power and low cost applications as
+MQTT, another IoT protocol, REST is widely used due to its simplicity,
+flexibility, and scalability.</p>
+<p>REST API actions correspond directly with HTTP methods, though the
+two aren't necessarily the same. The REST (or RESTful) API defines the
+interaction model when making requests to a web service, while HTTP
+defines the data formatting and transfer processes of the messages being
+sent and received. The exact functionality of RESTful APIs will vary
+depending on the service with which you are interacting.</p>
+<p>Some of the most commonly used HTTP requests/methods used for REST
+are:</p>
+<ul>
+<li><p><strong>GET</strong>: used to retrieve data or information from a
+service. May also just be used as a simple trigger.</p>
+<ul>
+<li>Example: For AWS IoT, GET can be used to retrieve a device’s
+parameters from its shadow.</li>
+</ul></li>
+<li><p><strong>POST</strong>: used to create (and often update) service
+entities.</p>
+<ul>
+<li>Example: For AWS IoT, POST is used to update a device’s parameters
+in the device shadow.</li>
+</ul></li>
+<li><p><strong>DELETE</strong>: used to manage and remove service
+entities.</p>
+<ul>
+<li>Example: For AWS IoT, DELETE is used to delete a device shadow.</li>
+</ul></li>
+</ul>
+<p>Other RESTful API commands may exist, depending on the service, and
+are based off of the HTTP commands: <em>HEAD, PUT, TRACE, OPTIONS,
+CONNECT, PATCH</em>.</p>
+<!-- For additional information, one good resource is [Beginners guide to
+creating a REST API](https://www.andrewhavens.com/posts/20/beginners-guide-to-creating-a-rest-api). -->
+
+<h3 id="aws-iot">AWS IoT</h3>
+<p>Amazon Web Services (AWS) is a collection commercial web and cloud
+services, that users can pay to utilize. This removes the need for
+individual businesses to develop the vast and complex infrastructure
+needed for creating scalable web applications. The AWS Internet of
+Things (IoT) service was made public in 2015 and is an ecosystem and
+framework for managing IoT devices and services.</p>
+<p>To represent real-world devices in the cloud and maintain a
+persistent/coherent state with intermittent network connections, AWS IoT
+has a concept of a <em>device shadow</em>. This shadow represents the
+<em>real-world</em> device’s state in the cloud. As the device changes
+states, it pushes its changes to the shadow device on AWS via MQTT or
+RESTful API. If the device loses network connection, and then comes back
+online, the device can pull the last-known state from the shadow to
+update itself. Updates to this shadow can trigger actions in other
+services as well using <em>Rules</em>. In this lab, a rule is used to
+send text messages to your email.</p>
+<hr />
+<h3 id="prelab-checkoff-task"><em>Prelab Checkoff Task</em></h3>
+<p>The prelab is a set of 5 questions designed to prepare you
+concpetually for the lab. The assignment is graded on completion and
+expected to take no more than an hour at most to finish.</p>
+<p><strong>Please bring a completed copy of the Lab 4 Prelab Assignment
+(posted on Canvas) and show your TA at the beginning of lab for
+verification.</strong></p>
+<hr />
+<h2 id="part-i-connecting-to-aws-and-updating-the-device-shadow">Part I:
+Connecting to AWS and Updating the Device Shadow</h2>
+<blockquote>
+<p>Note: AWS IoT may have changed its UI since these instructions were
+originally written. Please be aware of this and if things are not
+exactly as they appear to be in the image, do your best to locate them
+on your own.</p>
+</blockquote>
+<h3 id="setting-up-an-amazon-aws-account">Setting up an Amazon AWS
+account</h3>
+<p>For this lab, you will need to setup an Amazon AWS account and get a
+basic understanding of AWS. One person per team will need to create an
+AWS account that can be shared for completing this lab. Notify a TA
+immediately if you or your partner are unable to do so.</p>
+<div class="fig">
+  <img src="./media/lab4-nav-to-iot-core.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 1:</b> AWS Console View</span>
+</div>
+
+<p>After setting up an account, log into the console. You should end up
+seeing a page similar to Figure 1. After you are logged in, expand the
+services and click on the Internet of Things and select IoT Core. If it
+does not appear, make sure you have selected an Amazon AWS region at
+which this service is active. We recommend that you use the <u>U.S. East
+(North Virginia)</u> AWS server for this lab. The controls on the left
+will list your setup certificates, things, rules, and policies. In the
+bottom left corner of the screen, there is a <em>Learn</em> button and a
+link to Amazon’s IoT <em>interactive</em> tutorial. Click on it, and go
+through the tutorial for a <em>high-level explanation</em> about how AWS
+IoT uses Rules to do cool things.</p>
+<h3 id="setting-up-a-device-thingshadow">Setting Up a Device
+Thing/Shadow</h3>
+<p>For the next part of the lab, you will need to generate the access
+keys to allow your CC3200 to connect to your Amazon AWS account
+securely. For a <em>real-world</em> device to connect to Amazon AWS you
+will need to do the following:</p>
+<ol type="1">
+<li><p><strong>Create a Device Thing/Shadow</strong> (Device name, which
+can have variables created to interact with the device). This will
+generate a server-side representation of your <em>real-world</em> device
+(your thing).</p></li>
+<li><p><strong>Generate the required certificates and keys</strong> for
+establishing an encrypted connection. (This is different from the
+Starfield Cert)</p></li>
+<li><p><strong>Attach the certificate and keys</strong> to the Device
+Thing/Shadow.</p></li>
+<li><p><strong>Give the Device Thing/Shadow permission</strong> to use
+the IoT functions of AWS.</p></li>
+</ol>
+<p>These steps are done using the AWS IoT Console interface.</p>
+<div class="fig">
+  <img src="./media/lab4-create-thing-1.png" style="width:8in;height:auto" />
+  <img src="./media/lab4-create-thing-2.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 2:</b> Creating a Thing</span>
+</div>
+
+<ol type="1">
+<li><p>Return to the AWS IoT page and click on <em>Manage Things</em>
+and create a thing. On the next page select <em>Create single
+thing</em>. You should be presented with a display similar to Figure
+2.</p>
+<ul>
+<li><p>For your first device thing, it is recommended you give it a
+descriptive name, like <code>\&lt;my_id_name\&gt;\_CC3200Board</code>
+and leave the Type and Attributes options blank. Select <em>Unnamed
+Shadow</em> option and click <em>Next</em>. Select <em>Skip creating a
+certificate</em> and create the thing. We will create the certificates
+later.</p></li>
+<li><p>If everything is successful you should see something similar to
+Figure 3.</p></li>
+</ul>
+<div class="fig">
+  <img src="./media/lab4-thing-created.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 3:</b> Thing created successfully</span>
+</div>
+</li>
+<li><p>Click on the thing you have just created. On the next page open
+<em>Device Shadow</em> tab and then click on your <em>classic
+shadow</em>. This will display information about how to interact with
+the AWS representation of the device thing, namely the device
+<em>shadow</em>. You should end up with a view similar to Figure 4.</p>
+<div class="fig">
+  <img src="./media/lab4-device-shadow-details.png" 
+  style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 4:</b> Detailed view of AWS Thing</span>
+</div>
+</li>
+<li><p>The REST API endpoint displays the web address for the AWS
+Thing/Shadow and contains the web address of your account’s AWS
+Endpoint. For now, copy the endpoint address into a word or text file,
+and save it for reference. You will need it later to connect to the AWS
+server.</p>
+<ul>
+<li><p>Below is an example Restful API endpoint address with the
+standard endpoint address for the account highlighted. The initial
+string of characters will be a unique string generated for your account
+by AWS, like so:
+<code>https://&lt;endpoint&gt;/things/&lt;thingName&gt;/shadow</code></p></li>
+<li><p>Ex:
+<code>https://xxxxxxxxxxx.iot.us-west-2.amazonaws.com/things/CC3200_Thing/shadow</code></p></li>
+<li><p>Endpoint:
+"<code>&lt;identifier&gt;.iot.&lt;region&gt;.amazonaws.com</code>"</p></li>
+</ul></li>
+<li><p>After you have recorded your endpoint address, we can generate
+the required certificates, keys, and IoT permissions by opening the
+<em>SecureCertificates</em> tab and <em>Create certificate</em>. Use the
+<em>Auto-generate</em> method and select <em>active</em> for the
+certificate status.</p>
+<div class="fig">
+  <img src="./media/lab4-iot-certificates.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 5:</b> Connect a Device Screen</span>
+</div>
+</li>
+<li><p>AWS should generate the following items:</p>
+<ul>
+<li>public key</li>
+<li>private key</li>
+<li>RootCA certificate</li>
+<li>certificate for device identification and traffic encryption</li>
+</ul>
+<p>You should be able to download these (as well as AWS IoT’s root
+certificate authority) to your computer. <em>You <strong>MUST</strong>
+download and save these files as <strong>you will not be able to
+retrieve the public and private keys after you close the page.</strong>
+<strong>Only</strong> Private and Device certificate will be used.
+RootCA has been provided on Canvas
+(<code>StarfieldClass2CA.crt.der</code>)</em>.</p>
+<ul>
+<li>We suggest saving the files in a folder with the name of your
+Thing/Shadow so that it is clear what keys/certificates correspond to
+which device.</li>
+<li>After downloading, don’t forget to <em>Activate</em> the
+certificate. You can learn more about how these certificates are used <a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/server-authentication.html">here</a>.</li>
+</ul>
+<div class="fig">
+  <img src="./media/lab4-device-certificates.png"
+  style="width:5in;height:auto" />
+  <span class="caption"><b>Figure 6:</b> Download page for generated 
+  Certificate and Key files</span>
+</div>
+</li>
+</ol>
+<h3 id="setting-up-an-access-policy-for-device-shadows">Setting up an
+Access Policy for Device Shadows</h3>
+<p>To represent your <em>thing</em> (i.e. – our CC3200 board) in the
+cloud, AWS uses the concept of a <em>device shadow</em> to which you can
+get the last state, or push a new state to the server. This is useful
+when connection to a wireless network is intermittent, as the device
+could pull the previous state from the cloud and maintain continuity.
+However, appropriate configurations must be made on AWS to ensure that
+the devices have the <em>privilege</em> to perform the actions
+requested. These next steps will walk you through how to do this:</p>
+<ol type="1">
+<li>On your IoT services panel, navigate to <em>Secure Policies</em> and
+create a new policy. Give your policy a descriptive name, and add two
+statements with actions “iot:GetThingShadow” and
+“iot:UpdateThingShadow”. Furthermore, update the Amazon Resource Number
+(ARN) to signify that these actions apply to your <em>thing</em> created
+previously (to find your ARN, see Figure 4). Be sure to select the
+<em>Allow</em> effect and finish creating the policy. You can learn more
+about the actions and other access management modules in the <a
+href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">AWS
+documentation</a>.</li>
+</ol>
+  <div class="fig">
+    <img src="./media/lab4-iot-policies.png" style="width:8in;height:auto" />
+    <img src="./media/lab4-policy-statements.png" style="width:8in;height:auto" />
+    <span class="caption"><b>Figure 7:</b> Adding a Policy to a Device</span>
+  </div>
+
+<ol start="2" type="1">
+<li><p>Now that you’ve created a policy with appropriate privileges for
+our lab, let’s attach it to the certificate your created previously.</p>
+<ul>
+<li>Navigate to the <em>Certificates</em> section (Figure 8) and select
+the certificate you have just created.</li>
+</ul>
+<div class="fig">
+  <img src="./media/lab4-secure-certificates.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 8:</b> Select Created Certificate</span>
+</div>
+
+<ul>
+<li>Now select <em>ActionsAttach policy</em> (Figure 9). Select the
+policy you just created and click "Attach". This will allow you to use
+the GET and POST commands via REST from the device associated with this
+certificate.</li>
+</ul>
+<div class="fig">
+  <img src="./media/lab4-attach-policy-1.png" style="width:5in;height:auto" />
+  <img src="./media/lab4-attach-policy-2.png" style="width:5in;height:auto" />
+  <span class="caption"><b>Figure 9:</b> Attach a Policy to Certificate</span>
+</div>
+</li>
+</ol>
+<h3 id="converting-keyscertificates-with-openssl">Converting
+Keys/Certificates with OpenSSL</h3>
+<p>In this part of the lab, you will convert the private key and
+certificates to another format. This is necessary since AWS uses the
+<code>.pem</code> format, while your CC3200 uses the <code>.der</code>
+format.</p>
+<p>The connection security between the CC3200 board and AWS is
+guaranteed through the TLS protocol. There are four components involved:
+the <strong>public</strong> and <strong>private key</strong>, a
+<strong>certificate</strong> and a <strong>root certificate</strong>.
+While the private key is used to decipher encrypted messages, the
+certificate is used to validate the public key. Certificates are built
+on a chain of trust, and so there is a root certificate which is used to
+sign the certificate.</p>
+<p>The key and certificates can exist in either <code>.pem</code> or
+<code>.der</code> format. The former has ASCII-readable characters
+(unsecure, readable), while the latter is in binary and more compact
+(still unsecure, but harder to read). Your generated files in AWS are in
+the <code>.pem</code> format but the CC3200 requires the
+<code>.der</code> format.</p>
+<p>To convert the files from <code>.pem</code> to <code>.der</code>
+format, we will use openSSL, an open source library for transport layer
+security.</p>
+<blockquote>
+<p>Note: You will need to modify your file names and file paths to where
+you saved your keys/certificates. If necessary, move the files that need
+to be converted into the same file directory that openSSL was installed
+in. The <code>rootCA</code> file will be shared among all of the CC3200s
+used for the project and debugging. The client and private keys should
+be unique to each device. It is highly recommended to group or name the
+files accordingly so that the keys/certificate pairs do not get mixed up
+or over-written.</p>
+</blockquote>
+<blockquote>
+<p>To reiterate: <strong>You MUST use OpenSSL Version
+1.1.1</strong>.</p>
+</blockquote>
+<h4 id="windows">Windows</h4>
+<ol type="1">
+<li>Install OpenSSL 1.1.1. The following link may be helpful: <a
+href="https://wiki.openssl.org/index.php/Binaries">https://wiki.openssl.org/index.php/Binaries</a></li>
+<li>Open a command prompt and navigate to the openSSL installation
+directory. The commands that are needed are the following:
+<ul>
+<li>For the certificate file:
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> x509<span class="at"> -outform</span> der<span class="at"> -in</span> &quot;C:\\&lt;path\to&gt;\certificate.pem.crt&quot;<span class="at"> -out</span> &quot;C:\\&lt;path\to&gt;\client.der&quot;</span></code></pre></div></li>
+<li>For the Private Key File:
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> rsa<span class="at"> -outform</span> der<span class="at"> -in</span> &quot;C:\\&lt;path\to&gt;\private.pem.key&quot;<span class="at"> -out</span> &quot;C:\\&lt;path\to&gt;\private.der&quot;</span></code></pre></div></li>
+</ul></li>
+</ol>
+<h4 id="mac">Mac</h4>
+<ol type="1">
+<li><p>Open Terminal and install OpenSSL in a new mamba/conda
+environment.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ mamba</span> create<span class="at"> -n</span> openssl1.1</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">$ mamba</span> activate openssl1.1</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">$ mamba</span> install<span class="at"> -c</span> conda-forge openssl=1.1.1<span class="at"> -y</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">// check for correct version of openssl</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> version</span></code></pre></div></li>
+<li><p>Navigate to the directory with the certificate and key files,
+then run the conversion commands:</p>
+<ul>
+<li>For the certificate file:
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> x509<span class="at"> -outform</span> der<span class="at"> -in</span> &quot;path/to/certificate.pem.crt&quot;<span class="at"> -out</span> &quot;path/to/client.der&quot;</span></code></pre></div></li>
+<li>For the Private Key file:
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> rsa<span class="at"> -outform</span> der<span class="at"> -in</span> &quot;path/to/private.pem.key&quot;<span class="at"> -out</span> &quot;path/to/private.der&quot;</span></code></pre></div></li>
+</ul></li>
+</ol>
+<h3 id="updating-the-servicepack">Updating the ServicePack</h3>
+<p>If the firmware on your CC3200 is out of date, you should use
+UniFlash to update to the latest service pack. When you run the
+application program on the CC3200, you should verify that you get the
+updated Build Version in one of the status messages. For example:</p>
+<pre><code>Host Driver Version: 1.0.1.6
+
+Build Version 2.10.0.0.31.1.4.0.1.1.0.3.34</code></pre>
+<p>(exact numbers will be different.)</p>
+<blockquote>
+<p>Note: the Host Driver Version is currently hard-coded to
+<code>1.0.1.14</code>, however, you should have uploaded the most recent
+service pack <code>1.0.1.15</code>.</p>
+</blockquote>
+<p><strong>Windows</strong> (Preferred): Open UniFlash and configure for
+CC3200. Then in the main page, select
+<code>ServicePack Programming</code>, then navigate to your ServicePack
+directory (not the same as the sdk directory) and select the
+<code>servicepack&lt;...&gt;.bin</code> file. Hit ok and let it do its
+thing.</p>
+<p><strong>Mac</strong>: For Mac users, you should be able to do the
+same using <code>cc3200tool</code> with the following command:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ cc3200tool</span><span class="at"> --sop2</span> \~rts<span class="at"> --reset</span> dtr <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>format_flash<span class="at"> --size</span>=1M <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>write_file<span class="at"> --file</span>-size=0x20000 <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     --signature &lt;path/to/servicepack&gt;/ota/ota_1.0.1.15-2.15.0.1.ucf.signed.bin <span class="dt">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     &lt;path/to/servicepack&gt;/ota/ota_1.0.1.15-2.15.0.1.ucf /sys/servicepack.ucf</span></code></pre></div>
+<p>(There is unfortunately currently no good way to confirm if this
+works.)</p>
+<h3 id="flash-key-and-certificates-to-cc3200">Flash Key and Certificates
+to CC3200</h3>
+<p>To enable a secure connection from your CC3200, you need to download
+the private key and certificates to your board. You will do this using
+the UniFlash utility or <code>cc3200tool</code>, as described in the
+Uniflash tutorial.</p>
+<p>You should flash the <code>.der</code> formatted certificates,
+<em>root certificate</em> (used for authenticating the AWS server),
+<em>client certificate</em> (used by AWS to authenticate our device),
+and the <em>private key</em> (for device-side encryption) to
+<strong>User Files</strong> using the UniFlash utility, as shown in
+Figure 10. You will specify the path to those files on your PC in the
+Url box and select the Erase, Update, and Verify checkboxes, and click
+<em>Program</em> to flash those files to the board. You can also load
+the application (which you will develop in a later part) binary into
+/sys/mcuimg.bin or you can download it from Code Composer Studio and run
+it from the Debugger. Take note of the path of your files on the flash
+(i.e. – the ‘Name’ field below) as you will need to reference them in
+your code. If you forget them, you can list the files on your flash by
+clicking on <em>List Files</em> in UniFlash.</p>
+<div class="fig">
+  <img src="./media/lab4-flash-certs.png" style="width:5in;height:auto" />
+  <span class="caption">
+    <b>Figure 10:</b> Sample Setup to Flash a Root Certificate Authority File
+    <br>
+    Note: You can ignore those `cert` files listed under "System Files" in the figure
+  </span>
+</div>
+
+<blockquote>
+<p>To reiterate: the cert files should be inside “User Files”. You can
+find an “add file” button near “program” and the path you use in your
+code should be exactly match the path you set in UNIFLASH, including the
+leading forward slash ‘/’.</p>
+</blockquote>
+<h3 id="communicating-with-aws-iot">Communicating with AWS IoT</h3>
+<p>Amazon’s RESTful API for AWS IoT provides access to <em>device
+shadows</em>, or <em>thing shadows</em>. These are JavaScript Object
+Notation (JSON) formatted data that allow state information for AWS
+things to be stored and retrieved, even when a device might be
+disconnected from the service. To store or retrieve data from a device
+shadow, Amazon provides special MQTT feeds and RESTful API calls.</p>
+<p>For example, the return values of the GET and POST requests
+respectively are:</p>
+<ul>
+<li><p><strong>GET Method: (GetThingShadow)</strong></p>
+<pre><code>GET /things/&lt;thingName&gt;/shadow HTTP/1.1
+
+Host: &lt;identifier&gt;.iot.&lt;region&gt;.amazonaws.com
+
+Connection: Keep-Alive</code></pre></li>
+<li><p><strong>POST Method: (UpdateThingShadow)</strong></p>
+<pre><code>POST /things/&lt;thingName&gt;/shadow HTTP/1.1
+
+Host: &lt;identifier&gt;.iot.&lt;region&gt;.amazonaws.com
+
+Connection: Keep-Alive
+
+Content-Type: application/json; charset=utf-8
+
+Content-Length: &lt;length&gt;
+
+{
+  &quot;state&quot;:{
+    &quot;desired&quot;:{
+      “color&quot;:&quot;green&quot;
+    }
+  }
+}</code></pre></li>
+</ul>
+<p>To send a RESTful API POST message to AWS, the service must first be
+connected to with the SimpleLink socket library. The initial connection
+should be to the base address for the service or website you are trying
+to communicate.</p>
+<p>For example, rather than the entire REST path, you would only connect
+to the domain:
+<code>&lt;endpoint&gt;.iot.&lt;region&gt;.amazonaws.com</code>.</p>
+<p>The HTTPS part of the address will be managed based on the socket
+credentials, and the AWS device thing subdirectory will be used in the
+RESTful API calls.</p>
+<p>The connection should have the following configurations to connect to
+AWS IoT:</p>
+<ul>
+<li>TLS1.2</li>
+<li>Cipher: TLS ECDHE RSA with AES 256 CBC SHA</li>
+<li>Port: 8443</li>
+<li>Certificates/Keys needed:
+<ul>
+<li>Certificate Authority for AWS (rootCA.der)</li>
+<li>x509 Device Certificate (cert.der)</li>
+<li>Private Key (private.der)</li>
+</ul></li>
+</ul>
+<p>The RESTful API application requires Internet connectivity through an
+Access Point (AP). The AP details are contained in the header file
+<code>common.h</code>. <strong>Modify the common.h header file, if
+necessary, to match the following configuration for the AP in the
+lab:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Values for below macros shall be modified as per access-point (AP) properties</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// SimpleLink device will connect to following AP when application is executed</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SSID_NAME </span><span class="st">&quot;eec172&quot;</span><span class="pp">              </span><span class="co">/* AP SSID */</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SECURITY_TYPE SL_SEC_TYPE_OPEN  </span><span class="co">/* Security type (OPEN or WEP or WPA)*/</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SECURITY_KEY </span><span class="st">&quot;&quot;</span><span class="pp">                 </span><span class="co">/* Password of the secured AP */</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SSID_LEN_MAX </span><span class="dv">32</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define BSSID_LEN_MAX </span><span class="dv">6</span></span></code></pre></div>
+<p><strong>Once <code>common.h</code> has been modified, you can build
+and test the example program.</strong></p>
+<blockquote>
+<p>Note: <code>common.h</code> may not reside in your workspace, so if
+you work on the lab computers <em>and</em> your personal laptop you will
+need to modify them in both places, and with the appropriate settings
+for the wireless network you are trying to connect with.</p>
+</blockquote>
+<p>Another important change is that <em>the secure client application
+must have the “current” date and time so that the credentials can be
+verified as valid</em>. In this example, we use variables in the main
+program to update the date and time. The date and time only need to be
+relatively recent. Having the date and time hard-coded into the program
+is obviously not a robust or secure programming method since the code
+will eventually stop working unless periodically updated. However, in
+the interest of reducing complexity, we will use this method for this
+lab.</p>
+<p>The date and time variables are stored in the following constants in
+<code>main.c</code>. <strong>Update these values every time you
+reprogram the device</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">//NEED TO UPDATE THIS FOR IT TO WORK!</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DATE      </span><span class="dv">10</span><span class="pp"> </span><span class="co">/* Current Date */</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MONTH      </span><span class="dv">5</span><span class="pp"> </span><span class="co">/* Month 1-12 */</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define YEAR    </span><span class="dv">2016</span><span class="pp"> </span><span class="co">/* Current year */</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define HOUR      </span><span class="dv">17</span><span class="pp"> </span><span class="co">/* Time - hours */</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MINUTE     </span><span class="dv">0</span><span class="pp"> </span><span class="co">/* Time - minutes */</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define SECOND     </span><span class="dv">0</span><span class="pp"> </span><span class="co">/* Time - seconds */</span></span></code></pre></div>
+<p>Now your CC3200 should be able to connect securely to AWS.</p>
+<blockquote>
+<p>Note: If you have curl installed on your computer, you can check the
+certificate you downloaded using the following command:</p>
+<pre><code>curl --tlsv1.2 &quot;https://ENDPOINT.iot.us-east-1.amazonaws.com:8443/things/THING_NAME/shadow&quot; \
+  --cacert AmazonRootCA1.pem \
+  --key KEY_ID-private.pem.key \
+  --cert KEY_ID-certificate.pem.crt</code></pre>
+<p>Please note that the port number <em>must</em> be 8443</p>
+<p>You can also check the DER files with a similar command:</p>
+<pre><code>curl --tlsv1.2 &quot;https://ENDPOINT.iot.us-east-1.amazonaws.com:8443/things/THING_NAME/shadow&quot; \
+  --cacert AmazonRootCA1.pem \
+  --key private.der \
+  --cert client.der \
+  --cert-type DER --key-type DER</code></pre>
+</blockquote>
+<hr />
+<h3 id="lab-checkoff-task-1"><em>Lab Checkoff Task 1</em></h3>
+<p><strong>Demonstrate that you can use a POST request to post state to
+your AWS thing and use a GET request to obtain status information on
+your AWS thing. You should receive an HTTP 200 status code, showing a
+successful POST or GET request, as well as some basic status information
+about your device thing.</strong></p>
+<blockquote>
+<p>Note: you need to give your thing shadow some initial state before
+you can do an HTTP GET on it. You can give the shadow state by using the
+HTTP POST command or by using the AWS web interface.</p>
+</blockquote>
+<p>In this part, you can start with the working example project
+<code>lab4-blank.zip</code> uploaded on Canvas.</p>
+<blockquote>
+<p>To build it, you will need to ensure that your
+<code>CC3200_SDK_ROOT</code> variable is set. The instructions to verify
+this as follows:</p>
+<ol type="1">
+<li>Right-Click on your project name and select
+<code>Show Build Settings</code>.</li>
+<li>Select <code>Build</code> on the right side of the window, then
+select the <code>Variables</code> tab.</li>
+<li>Check <code>Show System Variables</code> and search for the
+<code>CC3200_SDK_ROOT</code> variable. If it is present, double-click
+it, otherwise select <code>Add New</code> on the right side.</li>
+<li>Make sure the variable type is "Path", and in the value box, enter
+the file system path to your SDK folder.</li>
+</ol>
+</blockquote>
+<p>You will need to examine it carefully to understand it and modify it
+appropriately. In particular, you should examine the
+<code>http_post()</code> function to see how the HTTP command is sent to
+AWS.</p>
+<p>The data must be formatted properly or AWS (or any other web service)
+will not accept it as valid. In order to use this project on your
+system, you may need to modify the following files or parameters:</p>
+<ol type="1">
+<li><p><code>common.h</code> – as described above for the "eec172"
+Access Point.</p></li>
+<li><p><code>main.c</code> – you will need to use your own AWS endpoint
+path and thing name as well as changing the HTTP command in order to
+test both GET and POST. You should also change the message data that you
+post to your thing. However, be careful to keep the correct data format.
+You may also need to update the date, as described above.</p></li>
+<li><p><code>pinmux.c</code> – verify that the <code>pinmux.c</code>
+file sets up the pins that you intend to use. For the default
+application, only the UART0 and GPIO signals driving the on-board LED
+are actually used. If your program uses the same pins as the on-board
+LEDs, you will have problems.</p></li>
+<li><p>Flash the private key and the client certificates and root
+Certificate Authority into the CC3200 flash, as already
+described.</p></li>
+</ol>
+<p><strong>Demonstrate your working program to your TA to receive
+checkoff. You may continue to the next part in the
+meantime.</strong></p>
+<hr />
+<h2 id="part-ii-using-sns-to-send-a-message-to-email">Part II: Using SNS
+to Send a Message to Email</h2>
+<p>For this part, you will compose a text message using your IR remote
+and send it to your email. This will be accomplished by setting up a
+<em>topic</em> in the Simple Notification Service, registering your
+email, and establishing a <em>Rule</em> in the IoT service to trigger
+when you update your device shadow to send messages to your email.</p>
+<p>To do this you must perform the following:</p>
+<ol type="1">
+<li>Create a thing for the cc3200 as you have done before.</li>
+<li>Create an SNS topic.</li>
+<li>Subscribe to the SNS topic with your email.</li>
+<li>Create a rule to forward incoming thing messages to your SNS
+topic.</li>
+<li>Use the REST API to post to your topic.</li>
+</ol>
+<blockquote>
+<p>Note: For this lab we <em>highly</em> recommend that you use the “US
+East (North Virginia)” AWS server, as some servers are not compatible
+with certain AWS IoT services.</p>
+</blockquote>
+<p>We will walk you through <strong>creating an SNS topic</strong> and
+<strong>creating a rule</strong>.</p>
+<blockquote>
+<p>Note: If any step requires a “role”, you can create one of your own
+to continue.</p>
+</blockquote>
+<h3 id="creating-an-sns-topic">Creating an SNS Topic</h3>
+<p>Amazon Web Services has a collection of different web services which
+can be integrated to perform a larger function. So far you have been
+using the IoT service to communicate the states of <em>real-world
+devices or things</em> to the cloud. The Simple Notification Service
+(SNS) is another module that will allow you to push messages to
+subscribers.</p>
+<ol type="1">
+<li><p>Navigate to the SNS service by expanding the services tab and
+finding SNS under <em>Application Integration</em> (Figure 11), and
+create a new standard topic (Figure 12).</p>
+<div class="fig">
+  <img src="./media/lab4-iot-sns.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 11:</b> AWS Simple Notification Service</span>
+</div>
+
+<div class="fig">
+  <img src="./media/lab4-create-topic.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 12:</b> Creating a Topic</span>
+</div>
+</li>
+<li><p>Afterwards, create a subscription, where the protocol is
+<em>EMAIL</em> for text messages. The endpoint is the email address that
+will receive the messages. (Figure 13)</p>
+<div class="fig">
+  <img src="./media/lab4-create-subscription.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 13:</b> Creating a Subscription</span>
+</div>
+</li>
+<li><p>Open your email and confirm the subscription.</p></li>
+<li><p>Test that the module works by clicking on the ‘Publish message’
+button on top of the page to manually send a text message from the AWS
+Console to your email (use RAW format for now).</p></li>
+</ol>
+<h3 id="creating-an-iot-rule">Creating an IoT Rule</h3>
+<p>The next step is to create an IoT Rule that will trigger when you
+push updates to your shadow device. Earlier in the lab, we updated our
+device shadow (state) via the REST api. When our device shadow is
+updated, the IoT module publishes messages to several reserved Message
+Queue Telemetry Transport (<a
+href="https://en.wikipedia.org/wiki/MQTT">MQTT</a>) topics, a
+publish-subscribe ‘lightweight’ messaging protocol.</p>
+<p>In order to trigger your rule, we will configure AWS to listen for
+updates to the device shadow via these topics. A full list of reserved
+topics that can be subscribed to can be found <a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-mqtt.html">here</a>.</p>
+<ol type="1">
+<li><p>Navigate to the <em>ACT(Message Routing)Rules</em> section in the
+IoT module, and create a new rule. (Figure 14)</p>
+<ul>
+<li>You should listen to the topic
+<code>$aws/things/&lt;thingName&gt;/shadow/update/accepted</code> (the $
+should be <em>included</em>), report on the attribute ‘state.desired’,
+and leave the condition blank.</li>
+</ul>
+<div class="fig">
+  <img src="./media/lab4-create-rule.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 14:</b> Creating a Rule</span>
+</div>
+</li>
+<li><p>Attach an action that will send an SNS push notification when the
+rule is triggered.</p>
+<ul>
+<li>Select the SNS target to be the topic you created previously, and
+use the ‘RAW’ message format (for now).</li>
+<li>You will also need to create an IAM role to allow the IoT to access
+the SNS service ‘securely’ (you can learn more about Identity Access and
+Management [IAM] roles <a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/iam-users-groups-roles.html">here</a>
+but will not need to understand them for this lab). Your SQL query
+statement for your rule should be similar to Figure 15.</li>
+</ul>
+<div class="fig">
+  <img src="./media/lab4-configure-sql.png" style="width:8in;height:auto" />
+  <span class="caption"><b>Figure 15:</b> Setting up your IoT Rule</span>
+</div>
+</li>
+<li><p>Make sure the rule is <em>enabled</em> and try to push an update
+to your device shadow using your CC3200. In a couple of seconds you
+<em>should</em> get an email. Once that you works, you can clean up the
+formatting using JSON message format SNS action.</p>
+<ul>
+<li>To understand the JSON message format, go back to the SNS topic you
+made, click the <em>Publish a topic</em> button, and experiment with the
+<code>JSON message generator</code> to find the appropriate syntax.</li>
+<li>Determine how you will need to modify your SQL statement to "clean
+up" your message. <a
+href="http://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html">More
+on SQL-like formatting</a>.</li>
+</ul>
+<blockquote>
+<p>HINT: look at left bar, where there is more information. You may want
+to focus on “SELECT clause” part of SQL reference.</p>
+</blockquote></li>
+</ol>
+<div class="fig">
+  <div style='display: inline-block; vertical-align: bottom;'>
+    <img src="./media/lab4-task2-example-1.png" style="width:4in;height:auto" />
+    <span class="caption">CC3200 Log</span>
+  </div>
+  <div style='display: inline-block; vertical-align: bottom;'>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+  <div style='display: inline-block; vertical-align: bottom;'>
+    <img src="./media/lab4-task2-example-2.png" style="width:2in;height:auto" />
+    <span class="caption">Example Notification</span>
+  </div>
+  <span class="caption"><b>Figure 16:</b> Working Demo</span>
+</div>
+
+<hr />
+<h3 id="lab-checkoff-task-2"><em>Lab Checkoff Task 2</em></h3>
+<p><strong>Demonstrate to your TA that you can receive a clean sample
+message using the JSON message format to receive checkoff. You may
+continue to the next part in the meantime.</strong></p>
+<hr />
+<h2 id="part-iii-integrate-ir-remote-texting">Part III: Integrate IR
+Remote Texting</h2>
+<p>Now that you know have the SNS module and IoT Rules set up
+appropriately, you can start integrating your IR remote text messaging
+code (Lab 3) to send a text to your email. Start with the program for
+connecting to AWS via the REST API that you implemented in the last
+part. When you are done, you will be sending a text from your IR remote,
+to the CC3200, and then through the cloud to your email. Cool, yeah?</p>
+<hr />
+<h3 id="lab-checkoff-task-3"><em>Lab Checkoff Task 3</em></h3>
+<p><strong>Integrate the IR Remote Multi-Tap Texting interface with your
+code from Task 2 to send custom messages to your email.</strong></p>
+<p>The multi-tap texting interface is the same as that implemented in <a
+href="../lab3.html">lab3</a> Part IV.</p>
+<blockquote>
+<p>Note: If you were unable to implement Multi-Tap Texting in the
+previous lab, you can use the UART console as your interface without
+penalty.</p>
+</blockquote>
+<p><strong>Demonstrate your working program to your TA to receive
+checkoff.</strong></p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><p><a
+href="https://www.andrewhavens.com/posts/20/beginners-guide-to-creating-a-rest-api">Beginner's
+Guide to Creating a REST API</a></p></li>
+<li><p><a
+href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview">An
+Overview of HTTP</a></p></li>
+<li><p><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-quickstart.html">AWS
+IoT Quickstart</a></p></li>
+<li><p><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">AWS
+IoT Protocols</a></p></li>
+<li><p><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-thing-management.html">AWS
+IoT Managing Devices</a></p></li>
+<li><p><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html">AWS
+IoT Device Shadows</a></p>
+<ul>
+<li><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-data-flow.html">Interacting
+with Shadows</a></li>
+<li><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-rest-api.html">Shadow
+REST API</a></li>
+</ul></li>
+<li><p><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html">AWS
+IoT Rules</a></p>
+<ul>
+<li><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-create-rule.html">AWS
+IoT Create Rule</a></li>
+<li><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html">AWS
+IoT Rule SQL Reference</a></li>
+<li><a
+href="https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-mqtt.html">Shadow
+MQTT Topics</a>. HTTP requests can be used to publish to these MQTT
+topics, which in turn can be used to invoke a rule.</li>
+</ul></li>
+<li><p><a
+href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">AWS
+IAM</a></p></li>
+<li><p><a
+href="https://processors.wiki.ti.com/index.php/CC32xx_SSL_Demo_Application">CC32xx
+SSL Demo Application</a>:</p></li>
+</ul>
+<!-- 
+Configuring the AWS CLI client to connect to the Amazon Servers:
+<http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html>
+ -->
+
+<hr />
+<h2 id="lab-report">Lab Report</h2>
+<p>Refer to the <a href="lab-report.html">general lab report
+instructions</a> for general formatting and guidelines.</p>
+<p>Your lab report should include:</p>
+<ul>
+<li>A soft-copy of your well-written, <em>well-commented</em> code for
+Task 3
+<ul>
+<li>Include your names in the header comments of the file containing
+your main program.</li>
+<li>This can be a copy of the entire project directory (which you can
+export in CCS to a zip file by Right-Clicking the project name and
+selecting <code>Export -&gt; General -&gt; Archive File</code> and
+specifying the location)</li>
+</ul></li>
+<li>A well-written PDF report that contains, in addition to the general
+guidelines:
+<ul>
+<li><em>An written description of your program that explains how each
+section section of your code works and why it is necessary.</em>
+<ul>
+<li><em>In particular, you should describe each action taken in the
+<code>http_get</code> and <code>http_post</code> methods.</em></li>
+</ul></li>
+<li><em>A description of any noteworthy difficulties you encountered in
+constructing your solution</em>.</li>
+</ul></li>
+</ul>
+</article>
+</html>
