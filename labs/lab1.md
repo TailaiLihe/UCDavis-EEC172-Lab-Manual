@@ -162,7 +162,9 @@ programs to test with your CC3200 processor.
 
 6.  Click the bug icon or select **Run \> Debug** to lauch the Debug
     Perspective. 
-
+   
+    (Following paragraph is mainly for MAC user, if you don't have this problem, ignore it and go 7.)
+    
     The first time you attempt to run a program on the
     CC3200, you will get the following message:
 
@@ -171,7 +173,7 @@ programs to test with your CC3200 processor.
     > in the editor?**
 
     Click **Yes**, then give the new Target Configuration file a name,
-    such as ``cc3200.ccxml`.
+    such as `cc3200.ccxml`.
 
     Click the box “**Use shared location**” so that this configuration
     file can be used for all of your projects in this workspace. Then 
