@@ -12,7 +12,7 @@ Note that to download some of the TI software, you will need to set up a
 TI account. Establish your own account to download the software instead
 of trying to get it in some other way.
 
-1.  **Code Composer Studio (CSS) IDE** [latest]
+1.  **Code Composer Studio (CSS) IDE** [V12.5]
 
     <https://www.ti.com/tool/CCSTUDIO>
 
@@ -25,7 +25,7 @@ of trying to get it in some other way.
 
     (Windows-Only) <https://www.ti.com/tool/cc3200sdk>
 
-3.  **TI SYSCONFIG Tool** [latest]
+3.  **TI SYSCONFIG Tool** [V1.15]
 
     <https://www.ti.com/tool/SYSCONFIG>
 
