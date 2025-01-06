@@ -137,7 +137,7 @@ of trying to get it in some other way.
 ## Installing TI SysConfig
 
 1.  Visit the [SysConfig Download Page](https://www.ti.com/tool/download/SYSCONFIG).
-    Download the `Windows Installer for SysConfig`.
+    Download the `Windows Installer for SysConfig`. Use version 1.15
 
 2.  Run the `sysconfig-x.x.x_x-setup` application. Continue through all the 
     windows. When prompted, select the install directory, then continue 
