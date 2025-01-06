@@ -1093,71 +1093,6 @@
 
     /*end github markdown light*/
 
-        /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { color: #008000; } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { color: #008000; font-weight: bold; } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     
     .markdown-body {
         box-sizing: border-box;
@@ -1195,6 +1130,35 @@
 <header id="title-block-header">
 <h1 class="title">EEC172 Software Setup</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#requirements" id="toc-requirements">Requirements</a></li>
+<li><a href="#windows-1011" id="toc-windows-1011">Windows 10/11</a>
+<ul>
+<li><a href="#installing-ccs" id="toc-installing-ccs">Installing
+CCS</a></li>
+<li><a href="#installing-cc3200-support-files"
+id="toc-installing-cc3200-support-files">Installing CC3200 Support
+Files</a></li>
+<li><a href="#installing-ti-sysconfig"
+id="toc-installing-ti-sysconfig">Installing TI SysConfig</a></li>
+<li><a href="#installing-uniflash-v341"
+id="toc-installing-uniflash-v341">Installing UniFlash v3.4.1</a></li>
+<li><a href="#installing-putty" id="toc-installing-putty">Installing
+PuTTY</a></li>
+<li><a href="#installing-saleae-logic-2"
+id="toc-installing-saleae-logic-2">Installing Saleae Logic 2</a></li>
+</ul></li>
+<li><a href="#macos-catalina-or-later"
+id="toc-macos-catalina-or-later">MacOS Catalina or Later</a>
+<ul>
+<li><a href="#install-homebrew" id="toc-install-homebrew">Install
+Homebrew</a></li>
+<li><a href="#install-all-dependencies"
+id="toc-install-all-dependencies">Install All Dependencies</a></li>
+</ul></li>
+</ul>
+</nav>
 <h1 id="requirements">Requirements</h1>
 <p>The following software must be installed on your own computer to use
 it for project development. The software is already installed on the lab
@@ -1365,8 +1329,7 @@ prompted to install FTDI drivers, click <em>Yes</em></strong>.</p>
 <ol type="1">
 <li><p>We recommend PuTTY over TeraTerm, though it doesn't matter too
 much. To install PuTTY, if you have Chocolatey, you can run:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="an">choco install putty</span></span></code></pre></div>
+<pre class="console"><code>choco install putty</code></pre>
 <p>from an Administrator shell. Otherwise, you can install from the
 Microsoft Store, or you can install manually.</p></li>
 <li><p><strong>(Manual Install)</strong> Visit the <a
@@ -1405,53 +1368,46 @@ already have Homebrew installed, skip to step 3</em>).</p>
 <li><p>Open <code>/Applications/Utilities/Terminal.app</code></p></li>
 <li><p>Copy and paste (without the <code>$</code>) the following into
 the terminal prompt:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>$ /bin/bash<span class="at"> -c</span> &quot;$(curl<span class="at"> -fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span></code></pre></div>
+<pre class="console"><code>$ /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</code></pre>
 <p>Agree as necessary to continue the installation until the script
 finishes. (Allow homebrew to be install to the default path
 prefixes)</p></li>
 <li><p>After homebrew finishes installing, close and reopen your
 Terminal window. Then add the <code>ucd-eec172</code> <a
 href="https://docs.brew.sh/Taps">tap</a>:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ brew</span> tap ucd-eec172/ucd-eec172</span></code></pre></div></li>
+<pre class="console"><code>$ brew tap ucd-eec172/ucd-eec172</code></pre></li>
 </ol>
 <h2 id="install-all-dependencies">Install All Dependencies</h2>
 <ol type="1">
 <li><p><strong><code>conda</code>/<code>mamba</code></strong>.</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ brew</span> install<span class="at"> --cask</span> mambaforge</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">$ conda</span> init &quot;$(basename &quot;${SHELL}&quot;)&quot;</span></code></pre></div>
+<pre class="console"><code>$ brew install --cask mambaforge
+$ conda init &quot;$(basename &quot;${SHELL}&quot;)&quot;</code></pre>
 <p><strong>Close and reopen your Terminal after these commands
 complete.</strong></p></li>
 <li><p><strong>Code Composer Studio and TI SysConfig</strong>. <em>This
 requires that you have added <code>ucd-eec172/ucd-eec172</code> as a
 Tap. Installs both to /Applications/TI/</em></p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ brew</span> install<span class="at"> --cask</span> ucd-eec172-ccs</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">$ brew</span> install<span class="at"> --cask</span> ucd-eec172-sysconfig</span></code></pre></div></li>
+<pre class="console"><code>$ brew install --cask ucd-eec172-ccs
+$ brew install --cask ucd-eec172-sysconfig</code></pre></li>
 <li><p><strong>CC3200 Support Files</strong>. <em>Install sdk and
 supportpack to <code>/Applications/TI/lib</code></em>.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ brew</span> install<span class="at"> --cask</span> ucd-eec172-cc3200-support</span></code></pre></div></li>
+<pre class="console"><code>$ brew install --cask ucd-eec172-cc3200-support</code></pre></li>
 <li><p><strong>cc3200tool</strong>. This one is a bit more involved. In
 Terminal, navigate to your desired install directory, and run the
 following commands.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do"># uncomment and run if you do not have git</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do"># brew install git</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">$ git</span> clone https://github.com/rchtsang/cc3200tool.git</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">$ cd</span> cc3200tool</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">$ mamba</span> env create<span class="at"> -n</span> cc3200<span class="at"> -f</span> environment.yml</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">$ conda</span> activate cc3200</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">$ pip</span> install<span class="at"> -e</span> .</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">$ cc3200tool</span><span class="at"> -h</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do"># conda deactivate # to deactivate the virtual environment</span></span></code></pre></div>
+<pre class="console"><code># uncomment and run if you do not have git
+# brew install git
+$ git clone https://github.com/rchtsang/cc3200tool.git
+$ cd cc3200tool
+$ mamba env create -n cc3200 -f environment.yml
+$ conda activate cc3200
+$ pip install -e .
+$ cc3200tool -h
+# conda deactivate # to deactivate the virtual environment</code></pre>
 <p>If the <code>cc3200tool</code> is installed successfully, you should
 see a help string get printed to the output.</p></li>
 <li><p><strong>Saleae Logic 2</strong>.</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ brew</span> install<span class="at"> --cask</span> saleae-logic</span></code></pre></div>
+<pre class="console"><code>$ brew install --cask saleae-logic</code></pre>
 <p>Note any caveats and follow any additional instructions if brew
 prompts you.</p></li>
 </ol>

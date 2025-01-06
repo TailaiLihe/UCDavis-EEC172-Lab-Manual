@@ -1195,6 +1195,75 @@
 <header id="title-block-header">
 <h1 class="title">Lab 4 - Introduction to AWS and RESTful APIs</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#overview" id="toc-overview">Overview</a></li>
+<li><a href="#learning-objectives" id="toc-learning-objectives">Learning
+Objectives</a></li>
+<li><a href="#requirements-and-dependencies"
+id="toc-requirements-and-dependencies">Requirements and Dependencies</a>
+<ul>
+<li><a href="#software-requirements"
+id="toc-software-requirements">Software Requirements</a></li>
+</ul></li>
+<li><a href="#prelab-aws-iot-and-rest-apis"
+id="toc-prelab-aws-iot-and-rest-apis">Prelab: AWS IoT and REST APIs</a>
+<ul>
+<li><a href="#prelab-objectives" id="toc-prelab-objectives">Prelab
+Objectives</a></li>
+<li><a href="#rest-apis" id="toc-rest-apis">REST APIs</a></li>
+<li><a href="#aws-iot" id="toc-aws-iot">AWS IoT</a></li>
+<li><a href="#prelab-checkoff-task"
+id="toc-prelab-checkoff-task"><em>Prelab Checkoff Task</em></a></li>
+</ul></li>
+<li><a href="#part-i-connecting-to-aws-and-updating-the-device-shadow"
+id="toc-part-i-connecting-to-aws-and-updating-the-device-shadow">Part I:
+Connecting to AWS and Updating the Device Shadow</a>
+<ul>
+<li><a href="#setting-up-an-amazon-aws-account"
+id="toc-setting-up-an-amazon-aws-account">Setting up an Amazon AWS
+account</a></li>
+<li><a href="#setting-up-a-device-thingshadow"
+id="toc-setting-up-a-device-thingshadow">Setting Up a Device
+Thing/Shadow</a></li>
+<li><a href="#setting-up-an-access-policy-for-device-shadows"
+id="toc-setting-up-an-access-policy-for-device-shadows">Setting up an
+Access Policy for Device Shadows</a></li>
+<li><a href="#converting-keyscertificates-with-openssl"
+id="toc-converting-keyscertificates-with-openssl">Converting
+Keys/Certificates with OpenSSL</a></li>
+<li><a href="#updating-the-servicepack"
+id="toc-updating-the-servicepack">Updating the ServicePack</a></li>
+<li><a href="#flash-key-and-certificates-to-cc3200"
+id="toc-flash-key-and-certificates-to-cc3200">Flash Key and Certificates
+to CC3200</a></li>
+<li><a href="#communicating-with-aws-iot"
+id="toc-communicating-with-aws-iot">Communicating with AWS IoT</a></li>
+<li><a href="#lab-checkoff-task-1" id="toc-lab-checkoff-task-1"><em>Lab
+Checkoff Task 1</em></a></li>
+</ul></li>
+<li><a href="#part-ii-using-sns-to-send-a-message-to-email"
+id="toc-part-ii-using-sns-to-send-a-message-to-email">Part II: Using SNS
+to Send a Message to Email</a>
+<ul>
+<li><a href="#creating-an-sns-topic"
+id="toc-creating-an-sns-topic">Creating an SNS Topic</a></li>
+<li><a href="#creating-an-iot-rule"
+id="toc-creating-an-iot-rule">Creating an IoT Rule</a></li>
+<li><a href="#lab-checkoff-task-2" id="toc-lab-checkoff-task-2"><em>Lab
+Checkoff Task 2</em></a></li>
+</ul></li>
+<li><a href="#part-iii-integrate-ir-remote-texting"
+id="toc-part-iii-integrate-ir-remote-texting">Part III: Integrate IR
+Remote Texting</a>
+<ul>
+<li><a href="#lab-checkoff-task-3" id="toc-lab-checkoff-task-3"><em>Lab
+Checkoff Task 3</em></a></li>
+</ul></li>
+<li><a href="#resources" id="toc-resources">Resources</a></li>
+<li><a href="#lab-report" id="toc-lab-report">Lab Report</a></li>
+</ul>
+</nav>
 <h2 id="overview">Overview</h2>
 <p>In this lab, you will explore a RESTful API and use it to connect
 with Amazon Web Services (AWS). First, you will create a ‘thing’ in AWS
@@ -1575,32 +1644,27 @@ href="https://wiki.openssl.org/index.php/Binaries">https://wiki.openssl.org/inde
 directory. The commands that are needed are the following:
 <ul>
 <li>For the certificate file:
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> x509<span class="at"> -outform</span> der<span class="at"> -in</span> &quot;C:\\&lt;path\to&gt;\certificate.pem.crt&quot;<span class="at"> -out</span> &quot;C:\\&lt;path\to&gt;\client.der&quot;</span></code></pre></div></li>
+<pre class="console"><code>$ openssl x509 -outform der -in &quot;C:\\&lt;path\to&gt;\certificate.pem.crt&quot; -out &quot;C:\\&lt;path\to&gt;\client.der&quot;</code></pre></li>
 <li>For the Private Key File:
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> rsa<span class="at"> -outform</span> der<span class="at"> -in</span> &quot;C:\\&lt;path\to&gt;\private.pem.key&quot;<span class="at"> -out</span> &quot;C:\\&lt;path\to&gt;\private.der&quot;</span></code></pre></div></li>
+<pre class="console"><code>$ openssl rsa -outform der -in &quot;C:\\&lt;path\to&gt;\private.pem.key&quot; -out &quot;C:\\&lt;path\to&gt;\private.der&quot;</code></pre></li>
 </ul></li>
 </ol>
 <h4 id="mac">Mac</h4>
 <ol type="1">
 <li><p>Open Terminal and install OpenSSL in a new mamba/conda
 environment.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ mamba</span> create<span class="at"> -n</span> openssl1.1</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">$ mamba</span> activate openssl1.1</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">$ mamba</span> install<span class="at"> -c</span> conda-forge openssl=1.1.1<span class="at"> -y</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">// check for correct version of openssl</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> version</span></code></pre></div></li>
+<pre class="console"><code>$ mamba create -n openssl1.1
+$ mamba activate openssl1.1
+$ mamba install -c conda-forge openssl=1.1.1 -y
+// check for correct version of openssl
+$ openssl version</code></pre></li>
 <li><p>Navigate to the directory with the certificate and key files,
 then run the conversion commands:</p>
 <ul>
 <li>For the certificate file:
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> x509<span class="at"> -outform</span> der<span class="at"> -in</span> &quot;path/to/certificate.pem.crt&quot;<span class="at"> -out</span> &quot;path/to/client.der&quot;</span></code></pre></div></li>
+<pre class="console"><code>$ openssl x509 -outform der -in &quot;path/to/certificate.pem.crt&quot; -out &quot;path/to/client.der&quot;</code></pre></li>
 <li>For the Private Key file:
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ openssl</span> rsa<span class="at"> -outform</span> der<span class="at"> -in</span> &quot;path/to/private.pem.key&quot;<span class="at"> -out</span> &quot;path/to/private.der&quot;</span></code></pre></div></li>
+<pre class="console"><code>$ openssl rsa -outform der -in &quot;path/to/private.pem.key&quot; -out &quot;path/to/private.der&quot;</code></pre></li>
 </ul></li>
 </ol>
 <h3 id="updating-the-servicepack">Updating the ServicePack</h3>
@@ -1625,12 +1689,11 @@ directory (not the same as the sdk directory) and select the
 thing.</p>
 <p><strong>Mac</strong>: For Mac users, you should be able to do the
 same using <code>cc3200tool</code> with the following command:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">$ cc3200tool</span><span class="at"> --sop2</span> \~rts<span class="at"> --reset</span> dtr <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>format_flash<span class="at"> --size</span>=1M <span class="dt">\</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>write_file<span class="at"> --file</span>-size=0x20000 <span class="dt">\</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     --signature &lt;path/to/servicepack&gt;/ota/ota_1.0.1.15-2.15.0.1.ucf.signed.bin <span class="dt">\</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     &lt;path/to/servicepack&gt;/ota/ota_1.0.1.15-2.15.0.1.ucf /sys/servicepack.ucf</span></code></pre></div>
+<pre class="console"><code>$ cc3200tool --sop2 \~rts --reset dtr \
+format_flash --size=1M \
+write_file --file-size=0x20000 \
+     --signature &lt;path/to/servicepack&gt;/ota/ota_1.0.1.15-2.15.0.1.ucf.signed.bin \
+     &lt;path/to/servicepack&gt;/ota/ota_1.0.1.15-2.15.0.1.ucf /sys/servicepack.ucf</code></pre>
 <p>(There is unfortunately currently no good way to confirm if this
 works.)</p>
 <h3 id="flash-key-and-certificates-to-cc3200">Flash Key and Certificates

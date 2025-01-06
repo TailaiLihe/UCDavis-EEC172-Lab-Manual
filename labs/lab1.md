@@ -8,8 +8,8 @@ This tutorial will cover the basic software development
 tools that will be used in this course, including Code Composer Studio
 (CCS), CCS UniFlash, and the TI Pin Mux Tool.
 
-***This lab assignment is alotted 2 sections (1 week)
-and verification is due by the end of your last lab section of week 1.***
+***This lab assignment is alotted 3 sections (1.5 week)
+and verification is due by the end of your First lab section of week 2.***
 
 ## Learning Objectives
 

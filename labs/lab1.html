@@ -1196,13 +1196,64 @@
 <h1 class="title">Lab 1 - Development Tools Tutorial and Lab
 Introduction</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#overview" id="toc-overview">Overview</a></li>
+<li><a href="#learning-objectives" id="toc-learning-objectives">Learning
+Objectives</a></li>
+<li><a href="#requirements-and-dependencies"
+id="toc-requirements-and-dependencies">Requirements and Dependencies</a>
+<ul>
+<li><a href="#hardware-requirements"
+id="toc-hardware-requirements">Hardware Requirements</a></li>
+<li><a href="#software-dependencies"
+id="toc-software-dependencies">Software Dependencies</a></li>
+</ul></li>
+<li><a href="#background---compiling-and-flashing-for-embedded-systems"
+id="toc-background---compiling-and-flashing-for-embedded-systems">Background
+- Compiling and Flashing for Embedded Systems</a>
+<ul>
+<li><a href="#compiling" id="toc-compiling">Compiling</a></li>
+<li><a href="#flashing" id="toc-flashing">Flashing</a></li>
+</ul></li>
+<li><a href="#part-i-testing-examples-in-code-composer-studio"
+id="toc-part-i-testing-examples-in-code-composer-studio">Part I: Testing
+Examples in Code Composer Studio</a>
+<ul>
+<li><a href="#blinky-example" id="toc-blinky-example">Blinky
+Example</a></li>
+<li><a href="#lab-checkoff-task-1" id="toc-lab-checkoff-task-1"><em>Lab
+Checkoff Task 1</em></a></li>
+<li><a href="#uart-demo-example" id="toc-uart-demo-example">Uart Demo
+Example</a></li>
+</ul></li>
+<li><a href="#part-ii-lab1-application-program-exercise"
+id="toc-part-ii-lab1-application-program-exercise">Part II: Lab1
+Application Program Exercise</a>
+<ul>
+<li><a href="#lab-checkoff-task-2" id="toc-lab-checkoff-task-2"><em>Lab
+Checkoff Task 2</em></a></li>
+</ul></li>
+<li><a href="#part-iii-programming-flash-memory"
+id="toc-part-iii-programming-flash-memory">Part III: Programming Flash
+Memory</a>
+<ul>
+<li><a href="#windows-ccs-uniflash"
+id="toc-windows-ccs-uniflash">Windows: CCS UniFlash</a></li>
+<li><a href="#macos-cc3200tool" id="toc-macos-cc3200tool">MacOS:
+cc3200tool</a></li>
+<li><a href="#lab-checkoff-task-3" id="toc-lab-checkoff-task-3"><em>Lab
+Checkoff Task 3</em></a></li>
+</ul></li>
+</ul>
+</nav>
 <h2 id="overview">Overview</h2>
 <p>This tutorial will cover the basic software development tools that
 will be used in this course, including Code Composer Studio (CCS), CCS
 UniFlash, and the TI Pin Mux Tool.</p>
-<p><em><strong>This lab assignment is alotted 2 sections (1 week) and
-verification is due by the end of your last lab section of week
-1.</strong></em></p>
+<p><em><strong>This lab assignment is alotted 3 sections (1.5 week) and
+verification is due by the end of your First lab section of week
+2.</strong></em></p>
 <h2 id="learning-objectives">Learning Objectives</h2>
 <p>At the end of this lab, students should be able to:</p>
 <ul>
@@ -1429,9 +1480,8 @@ set the baud rate to 115200</p></li>
 <li><p><strong>MacOS</strong>: cc3200tool in Terminal</p>
 <ol type="1">
 <li><p>Open Terminal, then enter the following commands:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="an">conda activate cc3200</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">cc3200tool term 115200</span></span></code></pre></div></li>
+<pre class="console"><code>conda activate cc3200
+cc3200tool term 115200</code></pre></li>
 <li><p>Use <code>Ctrl+B</code> to stop the terminal.</p></li>
 </ol>
 <blockquote>
@@ -1758,40 +1808,39 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    write_file blinky.bin /sys/mcuimg.bin</span></code></pre></div>
 <p>Follow the prompts that the tool prints to the console. Here is a
 sample of what you should see:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode console"><code class="sourceCode simpleconsole"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">// testing</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">$ cc3200tool</span><span class="at"> --sop2</span> \~dtr<span class="at"> --reset</span> prompt <span class="dt">\</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>format_flash<span class="at"> --size</span> 1M <span class="dt">\</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>write_file uart_demo.bin /sys/mcuimg.bin</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:37,850 -- Connecting to target...</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="an">Reset the device with SOP2 asserted and press Enter</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,141 -- Connected, reading version...</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,156 -- connected to target</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,156 -- Version: CC3x00VersionInfo((0, 4, 1, 2), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (16, 0, 0, 0))</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,156 -- This is a CC3200 device</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,156 -- Switching to NWP bootloader...</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,170 -- Switching UART to APPS...</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:45,181 -- Resetting communications ...</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:48,422 -- timed out while waiting for ack</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:48,679 -- Uploading rbtl3100s.dll...</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:48,683 -- Getting storage list...</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:49,721 -- APPS version: CC3x00VersionInfo((0, 4, 0, 2), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (16, 0, 0, 0))</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:49,721 -- Formatting flash with size=1024</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:50,746 -- Uploading file uart_demo.bin -&gt; /sys/mcuimg.bin [13408, disk=13408]...</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="an">....</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,243 -- Getting storage info...</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,255 -- storage #2 info bytes: 0x10, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,255 -- Getting storage list...</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,282 -- Reading raw storage #2 start 0x0, size 0x2000...</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="an">................................</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,819 -- [1] detected a valid FAT revision: 3</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,819 -- Getting storage list...</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:51,845 -- Reading raw storage #2 start 0x1774, size 0x2774...</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="an">........................................</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:52,501 -- selected FAT revision: 3 (active)</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:52,502 -- FAT r3, num files: 1, used/free blocks: 9/247</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="an">2024-01-09 22:52:52,502 -- All commands done, bye.</span></span></code></pre></div></li>
+<pre class="console"><code>// testing
+$ cc3200tool --sop2 \~dtr --reset prompt \
+format_flash --size 1M \
+write_file uart_demo.bin /sys/mcuimg.bin
+2024-01-09 22:52:37,850 -- Connecting to target...
+Reset the device with SOP2 asserted and press Enter
+
+2024-01-09 22:52:45,141 -- Connected, reading version...
+2024-01-09 22:52:45,156 -- connected to target
+2024-01-09 22:52:45,156 -- Version: CC3x00VersionInfo((0, 4, 1, 2), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (16, 0, 0, 0))
+2024-01-09 22:52:45,156 -- This is a CC3200 device
+2024-01-09 22:52:45,156 -- Switching to NWP bootloader...
+2024-01-09 22:52:45,170 -- Switching UART to APPS...
+2024-01-09 22:52:45,181 -- Resetting communications ...
+2024-01-09 22:52:48,422 -- timed out while waiting for ack
+2024-01-09 22:52:48,679 -- Uploading rbtl3100s.dll...
+2024-01-09 22:52:48,683 -- Getting storage list...
+2024-01-09 22:52:49,721 -- APPS version: CC3x00VersionInfo((0, 4, 0, 2), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (16, 0, 0, 0))
+2024-01-09 22:52:49,721 -- Formatting flash with size=1024
+2024-01-09 22:52:50,746 -- Uploading file uart_demo.bin -&gt; /sys/mcuimg.bin [13408, disk=13408]...
+....
+2024-01-09 22:52:51,243 -- Getting storage info...
+2024-01-09 22:52:51,255 -- storage #2 info bytes: 0x10, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0
+2024-01-09 22:52:51,255 -- Getting storage list...
+2024-01-09 22:52:51,282 -- Reading raw storage #2 start 0x0, size 0x2000...
+................................
+2024-01-09 22:52:51,819 -- [1] detected a valid FAT revision: 3
+2024-01-09 22:52:51,819 -- Getting storage list...
+2024-01-09 22:52:51,845 -- Reading raw storage #2 start 0x1774, size 0x2774...
+........................................
+2024-01-09 22:52:52,501 -- selected FAT revision: 3 (active)
+2024-01-09 22:52:52,502 -- FAT r3, num files: 1, used/free blocks: 9/247
+2024-01-09 22:52:52,502 -- All commands done, bye.</code></pre></li>
 </ol>
 <blockquote>
 <p>The <code>blinky.bin</code> file should be located in a subfolder of

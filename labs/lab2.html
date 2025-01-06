@@ -1195,6 +1195,71 @@
 <header id="title-block-header">
 <h1 class="title">Lab 2 - Serial Interfacing with SPI and I2C</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#overview" id="toc-overview">Overview</a></li>
+<li><a href="#learning-objectives" id="toc-learning-objectives">Learning
+Objectives</a></li>
+<li><a href="#requirements-and-dependencies"
+id="toc-requirements-and-dependencies">Requirements and Dependencies</a>
+<ul>
+<li><a href="#hardware-requirements"
+id="toc-hardware-requirements">Hardware Requirements</a></li>
+<li><a href="#software-requirements"
+id="toc-software-requirements">Software Requirements</a></li>
+<li><a href="#lab-datasheets" id="toc-lab-datasheets">Lab
+Datasheets</a></li>
+</ul></li>
+<li><a href="#prelab---synchronous-serial-protocols"
+id="toc-prelab---synchronous-serial-protocols">Prelab - Synchronous
+Serial Protocols</a>
+<ul>
+<li><a href="#spi" id="toc-spi">SPI</a></li>
+<li><a href="#i2c" id="toc-i2c">I2C</a></li>
+<li><a href="#prelab-checkoff-task"
+id="toc-prelab-checkoff-task"><em>Prelab Checkoff Task</em></a></li>
+</ul></li>
+<li><a
+href="#part-i-controlling-the-oled-via-serial-peripheral-interface-spi"
+id="toc-part-i-controlling-the-oled-via-serial-peripheral-interface-spi">Part
+I: Controlling the OLED via Serial Peripheral Interface (SPI)</a>
+<ul>
+<li><a href="#running-spi_demo-on-two-cc3200-launchpads"
+id="toc-running-spi_demo-on-two-cc3200-launchpads">Running
+<code>spi_demo</code> on two CC3200 LaunchPads</a></li>
+<li><a href="#implement-oled-interface-using-spi"
+id="toc-implement-oled-interface-using-spi">Implement OLED interface
+using SPI</a></li>
+<li><a href="#lab-checkoff-task-1" id="toc-lab-checkoff-task-1"><em>Lab
+Checkoff Task 1</em></a></li>
+<li><a href="#verifying-spi-waveforms-using-a-saleae-logic"
+id="toc-verifying-spi-waveforms-using-a-saleae-logic">Verifying SPI
+waveforms using a Saleae logic</a></li>
+<li><a href="#lab-checkoff-task-2" id="toc-lab-checkoff-task-2"><em>Lab
+Checkoff Task 2</em></a></li>
+</ul></li>
+<li><a href="#part-ii-controlling-the-bma222-accelerometer-with-i2c"
+id="toc-part-ii-controlling-the-bma222-accelerometer-with-i2c">Part II:
+Controlling the BMA222 accelerometer with I2C</a>
+<ul>
+<li><a href="#running-i2c_demo-on-the-cc3200-launchpad"
+id="toc-running-i2c_demo-on-the-cc3200-launchpad">Running
+<code>i2c_demo</code> on the CC3200 LaunchPad</a></li>
+<li><a href="#verifying-i2c-waveforms-using-a-saleae-logic"
+id="toc-verifying-i2c-waveforms-using-a-saleae-logic">Verifying I2C
+waveforms using a Saleae logic</a></li>
+<li><a href="#lab-checkoff-task-3" id="toc-lab-checkoff-task-3"><em>Lab
+Checkoff Task 3</em></a></li>
+</ul></li>
+<li><a href="#part-iii-sliding-ball" id="toc-part-iii-sliding-ball">Part
+III: Sliding Ball</a>
+<ul>
+<li><a href="#lab-checkoff-task-4" id="toc-lab-checkoff-task-4"><em>Lab
+Checkoff Task 4</em></a></li>
+</ul></li>
+<li><a href="#lab-report" id="toc-lab-report">Lab Report</a></li>
+</ul>
+</nav>
 <h2 id="overview">Overview</h2>
 <p>In this lab, you will use SPI to interface the CC3200 LaunchPad to a
 color OLED display. You will also use I2C to communicate with an

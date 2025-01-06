@@ -7,8 +7,8 @@ all: $(HTML_FILES)
 
 # Rule to convert .md to .html
 %.html: %.md $(PROJ_DIR)/../assets/template.html $(PROJ_DIR)/../assets/simple-console.xml
-	pandoc --template=$(PROJ_DIR)/../assets/template.html --syntax-definition=$(PROJ_DIR)/../assets/simple-console.xml --highlight-style pygments -f gfm -t html $< -o $@
-
+#pandoc --template=$(PROJ_DIR)/../assets/template.html --syntax-definition=$(PROJ_DIR)/../assets/simple-console.xml --highlight-style pygments -f gfm -t html $< -o $@
+	pandoc --template=$(PROJ_DIR)/../assets/template.html --toc -f gfm -t html $< -o $@
 
 # Clean target to remove all generated .html files
 clean:
