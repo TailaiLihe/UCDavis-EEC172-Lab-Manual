@@ -12,7 +12,7 @@ an icon on your OLED display. You will also use a Saleae logic probe to
 capture and display SPI and I2C signal waveforms.
 
 ***This lab assignment is alotted 4 sections (2 weeks)
-and verification is due by the end of your last lab section of week 3.***
+and verification is due by the end of your First lab section of week 4.***
 
 ## Learning Objectives
 
