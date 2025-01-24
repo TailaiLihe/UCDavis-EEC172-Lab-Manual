@@ -27,7 +27,7 @@ and send text messages back and forth between two CC3200 LaunchPad
 boards via UART channel.
 
 ***This lab assignment is alotted 6 sections (3 weeks)
-and verification is due by the end of your last lab section of week 6.***
+and verification is due by the end of your first lab section of week 7.***
 
 ## Learning Objectives
 
