@@ -17,7 +17,10 @@ a high-level and modify it for your specific AWS account.
 Please watch the video [AWS IoT Getting
 Started](https://www.youtube.com/watch?v=tTazcL61JG8) to understand the
 basics of AWS IoT.
-
+- Project Demo/Verification (no extensions)
+	- **(2/26)** Sections A02, A04
+	- **(2/27)** Sections A03, A05
+  
 ## Learning Objectives
 
 At the end of this lab, students should be able to:

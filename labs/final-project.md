@@ -4,12 +4,12 @@ title: EEC172 Final Project Assignment
 
 **Final Project Deadlines**
 - Project Proposal
-	- **(5/22)** Sections A01, A02, A04
-	- **(5/23)** Sections A03, A05
+	- **(3/3)** Sections A02, A04
+	- **(3/4)** Sections A03, A05
 - Project Demo/Verification (no extensions)
-	- **(6/05)** Sections A01, A02, A04
-	- **(6/06)** Sections A03, A05
-- **(6/09)** Project Deliverables (no extensions)
+	- **(3/12)** Sections A02, A04
+	- **(3/13)** Sections A03, A05
+- **(3/17)** Project Deliverables (no extensions)
 
 > Note: This page may be updated, please refresh the page regularly
 > for changes to appear.
