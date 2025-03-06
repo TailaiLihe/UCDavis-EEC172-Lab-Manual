@@ -62,11 +62,12 @@ You may use all lab components used in past labs for free, and are welcome
 to purchase and use other components as well. 
 
 The instructional staff will also be assigning *Best Project
-Awards* to up to 2 teams from each section based on their project's complexity, creativity, 
+Awards* to 1 teams from the class based on their project's complexity, creativity, 
 and performance. The winning teams will receive *full points on all in-class
 quizzes* if they provide a well-documented, neatly wired, and
 polished demo, as well as a demo video highlighting the main features of 
-their project. 
+their project. The winner will be selected from candidates from each section(up to
+ 2 group pre-section), and candidates will have their lowest score of quizes dropped.
 
 Out of consideration for your fellow students, if you intend to compete
 for best project, we ask that the total cost of any additional components
