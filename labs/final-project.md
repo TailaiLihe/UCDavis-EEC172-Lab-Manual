@@ -67,7 +67,7 @@ and performance. The winning teams will receive *full points on all in-class
 quizzes* if they provide a well-documented, neatly wired, and
 polished demo, as well as a demo video highlighting the main features of 
 their project. The winner will be selected from candidates from each section(up to
- 2 group pre-section), and candidates will have their lowest score of quizes dropped.
+ 2 group pre-section), and candidates will have their one more lowest score of quizes dropped.
 
 Out of consideration for your fellow students, if you intend to compete
 for best project, we ask that the total cost of any additional components
