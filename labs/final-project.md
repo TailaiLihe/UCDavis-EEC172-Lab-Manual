@@ -9,7 +9,7 @@ title: EEC172 Final Project Assignment
 - Project Demo/Verification (no extensions)
 	- **(3/12)** Sections A02, A04
 	- **(3/13)** Sections A03, A05
-- **(3/17)** Project Deliverables (no extensions)
+- **(3/16 Sunday Midnight)** Project Deliverables (no extensions)
 
 > Note: This page may be updated, please refresh the page regularly
 > for changes to appear.
