@@ -23,9 +23,10 @@ any of the linked resources under [Helpful Links](#helpful-links)**
 
 ## Submission
 
-Canvas submissions should have 2 files:
+Canvas submissions should have at least 2 files:
 - `report.pdf`
 - `project.zip` (entire project exported from CCS)
+- `project2.zip` (if necessary)
 
 ***Lab reports are submitted on Canvas one week after the last section
 of the corresponding lab.***
@@ -36,6 +37,8 @@ of the corresponding lab.***
 
 The report should broadly contain the following sections:
 
+0.  **Checkoff sheet** contains:
+    - clear photo of your checkoff sheet
 1.  **Introduction** contains:
     - an overview of the procedures conducted in the lab
 2.  **Background** contains:
