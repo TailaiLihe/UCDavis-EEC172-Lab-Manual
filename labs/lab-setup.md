@@ -16,7 +16,7 @@ of trying to get it in some other way.
 
     <https://www.ti.com/tool/CCSTUDIO>
 
-    > Download and install the latest version of CCS. You will have access
+    > Download and install the correct version of CCS. You will have access
     > to the full-featured version (not code-size or time limited) when
     > using the CC3200 LaunchPad.
 
