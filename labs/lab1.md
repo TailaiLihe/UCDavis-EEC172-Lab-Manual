@@ -500,7 +500,7 @@ program onto the external flash device on the CC3200 LaunchPad.
     `blinky` example, `blinky.bin`, was selected from the CCS workspace.
     In addition, make sure the **Update**, and **Verify** check boxes 
     are selected. The UniFlash tool should now be ready to flash the 
-    CC3200 LaunchPad hardware.
+    CC3200 LaunchPad hardware. If you find that the code is not being flashed. Try check **Erase**
 
     <div class="fig">
         <img src="./media/lab1-uniflash-system-files.png" style="width:6in;height:auto" />
