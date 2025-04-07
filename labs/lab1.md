@@ -454,7 +454,7 @@ You may continue to the next part in the meantime.**
 
 In this part, you will learn how to program the external flash memory so
 that the program will remain in non-volatile memory through power
-cycles. This section will demonstrate how to load the ***blinky***
+cycles. This section will demonstrate how to load the ***Part II***
 program onto the external flash device on the CC3200 LaunchPad.
 
 ### Windows: CCS UniFlash
