@@ -11,7 +11,7 @@ html documents that Canvas doesn't play nice with.
 - [Lab Setup](labs/lab-setup.html)
 - [Lab 1](labs/lab1.html)
 - [Lab 2](labs/lab2.html)
-<!-- [Lab 3](labs/lab3.html)
-- [Lab 4](labs/lab4.html)h
+- [Lab 3](labs/lab3.html)
+<!--- [Lab 4](labs/lab4.html)h
 - [Final-project](labs/final-project.html)
 -->
