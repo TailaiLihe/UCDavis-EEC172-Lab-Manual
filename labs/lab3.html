@@ -1512,8 +1512,11 @@ format and general timing of your IR transmissions, as well as the
 specific binary data that is sent for each button in the target
 set.</strong> If possible, use the IR protocol documents mentioned above
 or other web resources to identify the protocol used for the IR
-transmission.</p>
-<p>Target set of keys:</p>
+transmission. Screen shot every key below, as well as binaray
+repersentation.</p>
+<p>Hint: you may use your Task 2 result to fill the binaray represents.
+It takes hours to do manually but less than 1 minutes using your code
+from Task 2. Target set of keys:</p>
 <ul>
 <li>Numeric keys: <code>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code></li>
 <li><code>DELETE</code> key (<em>or</em> <code>LAST</code> key)</li>
@@ -1551,6 +1554,17 @@ edges of the IR remote input signal and measure the pulse widths using
 of the microcontroller's SysTick module to determine the pulse widths.
 By analyzing the pattern of pulses, your program will determine which IR
 remote button was pressed.</p>
+<p>Hint:</p>
+<ol type="1">
+<li>check Timer example from SDK. "Timer_IF_Start" function only take ms
+level measurements, which is too long for this lab. However, take a look
+inside this function, and you will see that you can actually get a finer
+resolution.</li>
+<li>Use time interrupt to create your own clock.</li>
+<li>When you decode the pattern from remote, you can store them in a
+varible instead of array. Use "&lt;&lt;" smartly to contsuct bit-wise
+operation.</li>
+</ol>
 <hr />
 <h3 id="lab-checkoff-task-2"><em>Lab Checkoff Task 2</em></h3>
 <p><strong>Write a program to decode the incoming IR signal to recognize
