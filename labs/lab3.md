@@ -338,9 +338,9 @@ To capture the IR transmissions:
 general timing of your IR transmissions, as well as the specific binary 
 data that is sent for each button in the target set.** 
 If possible, use the IR protocol documents mentioned above or other web 
-resources to identify the protocol used for the IR transmission. Screen shot every key below, as well as binaray repersentation.
+resources to identify the protocol used for the IR transmission. Screen shot every key below, as well as binary repersentation.
 
-Hint: you may use your Task 2 result to fill the binaray representations. It takes hours to do manually but less than 1 minutes using your code from Task 2.
+Hint: you may use your Task 2 result to fill the binary representations. It takes hours to do manually but less than 1 minutes using your code from Task 2.
 Target set of keys:
 
 - Numeric keys: `0, 1, 2, 3, 4, 5, 6, 7, 8, 9`
