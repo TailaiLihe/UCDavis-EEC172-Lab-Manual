@@ -340,7 +340,7 @@ data that is sent for each button in the target set.**
 If possible, use the IR protocol documents mentioned above or other web 
 resources to identify the protocol used for the IR transmission. Screen shot every key below, as well as binaray repersentation.
 
-Hint: you may use your Task 2 result to fill the binaray represents. It takes hours to do manually but less than 1 minutes using your code from Task 2.
+Hint: you may use your Task 2 result to fill the binaray representations. It takes hours to do manually but less than 1 minutes using your code from Task 2.
 Target set of keys:
 
 - Numeric keys: `0, 1, 2, 3, 4, 5, 6, 7, 8, 9`
@@ -381,7 +381,7 @@ analyzing the pattern of pulses, your program will determine which IR
 remote button was pressed.
 
 Hint: 
-1. check Timer example from SDK. "Timer_IF_Start" function only take ms level measurements, which is too long for this lab. However, take a look inside this function, and you will see that you can actually get a finer resolution. 
+1. Check Timer example from SDK, the one in Canvas File is not recommended. "Timer_IF_Start" function only take ms level measurements, which is too long for this lab. However, take a look inside this function, and you will see that you can actually get a finer resolution. 
 2. Use time interrupt to create your own clock.
 3. When you decode the pattern from remote, you can store them in a varible instead of array. Use "<<" smartly to contsuct bit-wise operation.
 
