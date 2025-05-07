@@ -18,8 +18,7 @@ Please watch the video [AWS IoT Getting
 Started](https://www.youtube.com/watch?v=tTazcL61JG8) to understand the
 basics of AWS IoT.
 - Project Demo/Verification (no extensions)
-	- **(2/26)** Sections A02, A04
-	- **(2/27)** Sections A03, A05
+	2nd session of Week 8.
   
 ## Learning Objectives
 

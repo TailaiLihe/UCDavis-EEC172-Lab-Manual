@@ -4,12 +4,10 @@ title: EEC172 Final Project Assignment
 
 **Final Project Deadlines**
 - Project Proposal
-	- **(3/3)** Sections A02, A04
-	- **(3/4)** Sections A03, A05
+	2nd session of week 8. When Lab4 is due.
 - Project Demo/Verification (no extensions)
-	- **(3/12)** Sections A02, A04
-	- **(3/13)** Sections A03, A05
-- **(3/16 Sunday Midnight)** Project Deliverables (no extensions)
+	2nd session of week 10.
+- **(6/8 Sunday Midnight)** Project Deliverables (no extensions)
 
 > Note: This page may be updated, please refresh the page regularly
 > for changes to appear.
