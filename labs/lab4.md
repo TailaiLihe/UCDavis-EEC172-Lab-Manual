@@ -28,7 +28,9 @@ At the end of this lab, students should be able to:
 - Send data from a device to a user via Amazon's Simple Notification Service
 - Recognize the role and necessity of key exchange and certification in network security
 - Understand how the physical device can trigger actions on AWS via shadow updates
+## Wi-Fi Connectivity Issues
 
+If you encounter unstable Wi-Fi connections on campus (note that EDU Wi-Fi is incompatible due to its complex security settings), the recommended solution is to use the hotspot feature on a Windows laptop. The Windows device will act as a bridge between the EDU Wi-Fi and your CC3200. If you do not have access to a Windows laptop, consider asking someone nearby to share their hotspot with you.
 ## Requirements and Dependencies
 
 ### Software Requirements
