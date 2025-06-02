@@ -19,9 +19,9 @@ use of what you've learned in previous labs.
 
 The project is divided into 3 primary components:
 
-1.  [ 5 pts] Project Proposal and Bill of Materials (BOM)
+1.  [10 pts] Project Proposal and Bill of Materials (BOM)
 		<!-- graded on meeting design spec and rubric -->
-2.  [65 pts] Live Demonstration and Verification
+2.  [60 pts] Live Demonstration and Verification
 		<!-- graded on functionality, final complexity, and aesthetics -->
 3.  [30 pts] Project Deliverables
 	1.  [7.5 pts] In-class Presentation
@@ -158,7 +158,7 @@ within the bins.
 	</tr>
 	<tr>
 		<!-- Criteria -->
-		<td>Production Quality (10 points)</td>
+		<td>Production Quality (20 points)</td>
 		<!-- Exemplary -->
 		<td>Live demonstration has a well thought-out and intuitive user interaction model and
 			has a aesthetically appealing user interface (UI) and/or form factor. 
