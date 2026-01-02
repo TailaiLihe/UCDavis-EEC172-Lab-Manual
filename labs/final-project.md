@@ -7,7 +7,7 @@ title: EEC172 Final Project Assignment
 	2nd session of week 8. When Lab4 is due.
 - Project Demo/Verification (no extensions)
 	2nd session of week 10.
-- **(6/8 Sunday Midnight)** Project Deliverables (no extensions)
+- **(TBA)** Project Deliverables (no extensions)
 
 > Note: This page may be updated, please refresh the page regularly
 > for changes to appear.
