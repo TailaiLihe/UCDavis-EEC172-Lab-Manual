@@ -190,7 +190,8 @@ compatible with the CC3200**
 
 
 # MacOS Catalina or Later
-
+1. Install Installing CCS
+   
 (Tested on Sonoma, Apple M1 Pro)
 
 The labs can be done on macOS, but will require extensive use of the 
